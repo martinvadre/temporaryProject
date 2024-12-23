@@ -1,7 +1,39 @@
 "use client";
+
 import React, { useRef, useEffect } from "react";
 
 export default function Home(): React.JSX.Element {
+    const overlayRef = useRef<HTMLDivElement | null>(null);
+    const sidebarRef = useRef<HTMLDivElement | null>(null);
+
+    const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        event.stopPropagation();
+        if (overlayRef.current) {
+            overlayRef.current.classList.toggle("active");
+        }
+    };
+
+    const handleDocumentClick = (event: MouseEvent) => {
+        if (
+            overlayRef.current &&
+            sidebarRef.current &&
+            !sidebarRef.current.contains(event.target as Node) && 
+            overlayRef.current.classList.contains("active")
+        ) {
+            overlayRef.current.classList.remove("active");
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("click", handleDocumentClick);
+        return () => {
+            document.removeEventListener("click", handleDocumentClick);
+        };
+    }, []);
+
+    const stopPropagation = (event: React.MouseEvent<HTMLDivElement>) => {
+        event.stopPropagation();
+    };
 
     return (
         <>
@@ -10,7 +42,7 @@ export default function Home(): React.JSX.Element {
                 <nav className="navbar">
                     <div className="nav-wrap">
                         <ul className="menu">
-                            <div className="burger-box" id="overlay">
+                            <div className="burger-box" id="burger" onClick={handleOverlayClick}>
                                 <span></span>
                                 <span></span>
                                 <span className="burger-top"></span>
@@ -24,11 +56,11 @@ export default function Home(): React.JSX.Element {
             </header>
 
             {/* Overlay */}
-            <div className="overlay-wrap" id="overlay">
-                <div className="overlay">
-                    <div className="overlay-head">
+            <div className="overlay-wrap" id="overlay" ref={overlayRef}>
+                <div className="overlay" id="sidebar" ref={sidebarRef} onClick={stopPropagation}>
+                    <div className="head">
                         <ul className="menu">
-                            <div className="burger-box" id="overlay-burger">
+                            <div className="burger-box" id="burger" onClick={handleOverlayClick}>
                                 <span></span>
                                 <span></span>
                                 <span className="burger-top"></span>
@@ -38,11 +70,19 @@ export default function Home(): React.JSX.Element {
                             </div>
                         </ul>
                     </div>
-                    <div className="overlay-body">
+                    <div className="body">
                         <h2>Account</h2>
-                        <button className="btn-google" id="logoutButton">
-                            Logout
-                        </button>
+                        <ul>
+                            <li>
+                                <a href="">Calendar</a>
+                            </li>
+                            <li>
+                                <a href="">Todo List</a>
+                            </li>
+                            <li>
+                                <a href="">Setting</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -52,9 +92,7 @@ export default function Home(): React.JSX.Element {
                 <section className="intro-box">
                     <div className="welcome-box">
                         <div className="head" id="userInfo">
-                            <h2>
-                                Good Afternoon, Martin<span id="username"></span>
-                            </h2>
+                            <h2>Good Afternoon, Martin<span id="username"></span></h2>
                         </div>
                     </div>
                 </section>
@@ -78,9 +116,7 @@ export default function Home(): React.JSX.Element {
 
             <footer>
                 <div className="fixed-footer">
-                    <p className="current">
-                        Home <span className="lower early">{">"}</span>
-                    </p>
+                    <p className="current">Home <span className="lower early">{">"}</span></p>
                 </div>
             </footer>
         </>
