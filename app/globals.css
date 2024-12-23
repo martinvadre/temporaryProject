@@ -111,7 +111,7 @@ nav {
     justify-content: flex-start;
     z-index: 1001;
     background: rgba(0, 0, 0, 0.5);
-    animation: login-load var(--login-load-time) ease;
+    /* animation: login-load var(--login-load-time) ease; */
 }
 .overlay-wrap.active {
     display: flex;
@@ -120,45 +120,41 @@ nav {
     background: #ffffff;
     width: 300px;
     height: 100%;
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 16px 16px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
 }
-.overlay-head {
+.overlay .head {
     display: flex;
     padding: 0.85rem 1.2rem;
     align-items: center;
     justify-content: space-between;
 }
-.overlay-body {
+.overlay .body {
     padding: 0.85rem 1.2rem;
     text-align: center;
 }
-.overlay-body h2 {
+.overlay .body h2 {
     font: 550 20px/1.5 inter, sans-serif;
-    margin-bottom: 20px;
+    text-align: left;
 }
-.overlay-body p {
-    font: 450 12px/1.5 inter, sans-serif;
-    margin: 10px 0;
+.overlay .body ul li {
+    font: 450 12px/1.5 'inter', sans-serif;
     color: #777777;
-}
-.btn-google {
-    width: 100%;
-    padding: 10px;
-    background: none;
-    border: 1px solid #cecece;
-    color: #777777;
-    border-radius: 50px;
-    font-size: 16px;
-    cursor: pointer;
+    text-align: left;
+    margin-top: 1rem;
+    padding: .5rem;
+    border-radius: 8px;
     transition: ease .25s;
 }
-.btn-google:hover {
-    border: 1px solid #999999;
-    color: #555555;
+.overlay .body ul li:hover {
+    background: #f4f4f4;
     transition: ease .25s;
+}
+.overlay .body ul li a {
+    font: 450 12px/1.5 'inter', sans-serif;
+    color: #777777;
 }
 
 /* intro */
@@ -185,7 +181,7 @@ nav {
     color: #555555;
 }
 
-/* test-card */
+/* card */
 .card-container {
     max-width: 1200px;
     margin: auto;
@@ -356,11 +352,11 @@ footer {
 @keyframes login-load {
     0% {
         opacity: 0;
-        transform: translateY(-5%);
+        transform: translateX(-50%);
     }
     25% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
 }
 @keyframes about-load {
