@@ -3,9 +3,11 @@ import type { NextAuthConfig, Session, User } from "next-auth"
 import Google from "next-auth/providers/google"
 import Credentials from "next-auth/providers/credentials"
 import { getUser } from "./userHandler"
+import bcypt from "bcryptjs"
 
 interface CustomUser extends User {
    role?: string
+   password?: string
 }
 
 export default {
@@ -24,7 +26,17 @@ export default {
 
             const res = await getUser(email as string);
 
+            console.log(password)
+
             if (res.status == "error") {
+               throw new Error("Invalid credentials.")
+            }
+
+            if ((res.user as CustomUser).password == null) {
+               throw new Error("User does not exist.")
+            }
+
+            if (!bcypt.compareSync(password, (res.user as CustomUser).password as string)) {
                throw new Error("Invalid credentials.")
             }
 

@@ -2,13 +2,34 @@
 
 import { User } from "next-auth";
 import prisma from "./prismadb";
+import bcrypt from "bcryptjs";
 
-export async function createUser(email: string, password: string, name?: string): Promise<Record<string, string>> {
+interface CustomUser extends User {
+   role?: string
+   password?: string
+}
+
+export async function createUser(email: string, password: string, name?: string): Promise<Record<string, string | CustomUser>> {
+
+   const checkUser = await prisma.user.findUnique({
+      where: {
+         email,
+      },
+   });
+
+   if (checkUser) {
+      return { "status": "error", "message": "User already exists" };
+   }
+
+   const hashedPassword = bcrypt.hashSync(password, 10);
+
    const user = await prisma.user.create({
       data: {
-      name,
-      email,
-      password,
+         name,
+         email,
+         password: hashedPassword,
+         createdAt: new Date(),
+         updatedAt: new Date(),
       },
    });
 
