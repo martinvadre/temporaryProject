@@ -1,6 +1,6 @@
 /* roboto */ @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 /* inter */  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-/* arimo */ @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap');
+/* arimo */  @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap');
 
 * {
     margin: 0;
@@ -16,9 +16,10 @@
 html {
     scroll-behavior: smooth;
     --nav-load-time: 1s;
-    --login-load-time: 1.2s;
-    --about-load-time: 2.4s;
-    --work-load-time: 3.6s;
+    --overlay-load-time: 1s;
+    --sidebar-load-time: 1.2s;
+    --intro-load-time: 2.4s;
+    --card-load-time: 3.6s;
 }
 
 body {
@@ -28,7 +29,7 @@ body {
 }
 
 /* nav */
-nav {
+.navbar {
     width: 100vw;
     position: fixed;
     background: #ffffff;
@@ -42,45 +43,20 @@ nav {
 .nav-wrap {
     display: flex;
     margin: auto;
-    padding: .85rem 1.2rem;
+    padding: .5rem .7rem;
     align-items: center;
     justify-content: space-between;
 }
-.logo a {
-    font: 700 24px montserrat, sans-serif;
-    color: #323232;
-    width: fit-content;
-    transition: ease .25s;
-}
-.menu {
-    display: flex;
-}
-.menu li a {
-    font: 350 14px inter, sans-serif;
-    cursor: pointer;
-    color: #777777;
-    transition: ease .25s;
-}
-.menu li a:hover {
-    color: #027CEE;
-    transition: ease .25s;
-}
-.login-btn {
-    font: 450 16px inter, sans-serif;
-    padding: .6rem 1.2rem;
-    border-radius: 50px;
-    border: 1px solid #cecece;
-    color: #555555;
-    background: none;
-    cursor: pointer;
-    transition: ease .25s;
-}
-.login-btn:hover {
-    color: #027CEE;
-    border: 1px solid #027CEE;
-    transition: ease .25s;
-}
 .burger-box {
+    padding: .5rem;
+    border-radius: 8px;
+    transition: ease .25s;
+}
+.burger-box:hover {
+    background: #f4f4f4;
+    transition: ease .25s;
+}
+.burger {
     display: grid; 
     grid-template-columns: repeat(1, 1fr); 
     width: 16px; 
@@ -93,13 +69,8 @@ nav {
     height: 0px;
     transition: ease .25s;
 }
-.burger-box:hover .burger-top,
-.burger-box:hover .burger-btm {
-    border-color:#323232;
-    transition: ease .25s;
-}
 
-/* login overlay */
+/* Sidebar */
 .overlay-wrap {
     position: fixed;
     top: 0;
@@ -111,7 +82,7 @@ nav {
     justify-content: flex-start;
     z-index: 1001;
     background: rgba(0, 0, 0, 0.5);
-    /* animation: login-load var(--login-load-time) ease; */
+    /* animation: overlay-load var(--overlay-load-time) ease; */
 }
 .overlay-wrap.active {
     display: flex;
@@ -124,20 +95,22 @@ nav {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    animation: sidebar-load var(--sidebar-load-time) ease;
 }
 .overlay .head {
     display: flex;
-    padding: 0.85rem 1.2rem;
+    padding: .5rem .7rem;
     align-items: center;
     justify-content: space-between;
 }
 .overlay .body {
-    padding: 0.85rem 1.2rem;
     text-align: center;
+    padding: 0.85rem .5rem;
 }
-.overlay .body h2 {
-    font: 550 20px/1.5 inter, sans-serif;
+.overlay .body .account {
+    font: 550 20px/1.5 'inter', sans-serif;
     text-align: left;
+    padding: .25rem .5rem;
 }
 .overlay .body ul li {
     font: 450 12px/1.5 'inter', sans-serif;
@@ -164,21 +137,12 @@ nav {
     vertical-align: middle;
     margin: auto;
     padding: 8rem 1.2rem 0;
-    animation: about-load var(--about-load-time) ease;
+    animation: intro-load var(--intro-load-time) ease;
 }
 .intro-box .head {
-    margin: 1rem 0;
-    font-family: 'inter', sans-serif;
-    font-size: 20px;
-    font-weight: 600;
+    font: 600 16px 'inter', sans-serif;
     color: #323232;
-}
-.intro-box .body {
     margin: 1rem 0;
-    font-family: 'inter', sans-serif;
-    font-weight: 300;
-    font-size: 16px;
-    color: #555555;
 }
 
 /* card */
@@ -190,7 +154,7 @@ nav {
     display: grid;
     text-align: center;
     gap: 1.2rem;
-    animation: work-load var(--work-load-time) ease;
+    animation: card-load var(--card-load-time) ease;
 }
 .sche-card {
     grid-row: 1/ span 1;
@@ -205,7 +169,7 @@ nav {
     font: 450 12px/1.5 'inter', sans-serif;
     color: #777777;
     text-align: left;
-    margin: 0 .6rem .3rem;
+    padding: .25rem .5rem ;
     transition: ease .25s;
 }
 .card-wrap .body {
@@ -224,7 +188,7 @@ nav {
     animation: design-load var(--design-load-time) ease;
 }
 .design p {
-    font: 350 14px/1.5 roboto, sans-serif;
+    font: 350 14px/1.5 'roboto', sans-serif;
     color: #777777;
     transition: ease .25s;
 }
@@ -249,7 +213,7 @@ footer {
 }
 .fixed-footer a,
 .fixed-footer p {
-    font: 350 14px inter, sans-serif;
+    font: 350 14px 'inter', sans-serif;
     color: #323232;
     transition: ease .25s;
 }
@@ -275,15 +239,11 @@ footer {
 /* ------------------------------------------------ */
 
 @media all and (max-width: 580px) {
-     .card-wrap {
+    .card-wrap {
         grid-template-columns: repeat(1, 1fr);
     }
     .card .head {
         padding: .8rem 1.6rem 8rem;
-    }
-    .about {
-        text-align: left;
-        padding: 12rem 1.2rem 2rem;
     }
     .design p {
         font: 12px
@@ -295,7 +255,7 @@ footer {
     .fixed-footer p {
         font: 12px;
     }
-    @keyframes login-load {
+    @keyframes sidebar-load {
         0% {
             opacity: 0;
             transform: translateY(-5%);
@@ -349,17 +309,25 @@ footer {
         transform: translate(-50%, 0);
     }
 }
-@keyframes login-load {
+@keyframes overlay-load {
     0% {
         opacity: 0;
-        transform: translateX(-50%);
     }
-    25% {
+    12% {
+        opacity: 1;
+    }
+}
+@keyframes sidebar-load {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    12% {
         opacity: 1;
         transform: translateX(0);
     }
 }
-@keyframes about-load {
+@keyframes intro-load {
     0% {
         opacity: 0;
         transform: translateY(40%);
@@ -372,7 +340,7 @@ footer {
         transform: translateY(0);
     }
 }
-@keyframes work-load {
+@keyframes card-load {
     0% {
         opacity: 0;
         transform: translateY(40%);

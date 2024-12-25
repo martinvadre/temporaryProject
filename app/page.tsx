@@ -1,91 +1,19 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useEffect } from "react";
+import { navHandler } from "./globals";
+import Navbar from "./navbar";
+import Sidebar from "./sidebar";
 
 export default function Home(): React.JSX.Element {
-    const overlayRef = useRef<HTMLDivElement | null>(null);
-    const sidebarRef = useRef<HTMLDivElement | null>(null);
-
-    const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
-        event.stopPropagation();
-        if (overlayRef.current) {
-            overlayRef.current.classList.toggle("active");
-        }
-    };
-
-    const handleDocumentClick = (event: MouseEvent) => {
-        if (
-            overlayRef.current &&
-            sidebarRef.current &&
-            !sidebarRef.current.contains(event.target as Node) && 
-            overlayRef.current.classList.contains("active")
-        ) {
-            overlayRef.current.classList.remove("active");
-        }
-    };
-
     useEffect(() => {
-        document.addEventListener("click", handleDocumentClick);
-        return () => {
-            document.removeEventListener("click", handleDocumentClick);
-        };
+        navHandler();
     }, []);
-
-    const stopPropagation = (event: React.MouseEvent<HTMLDivElement>) => {
-        event.stopPropagation();
-    };
 
     return (
         <>
-            {/* Navbar */}
-            <header role="banner">
-                <nav className="navbar">
-                    <div className="nav-wrap">
-                        <ul className="menu">
-                            <div className="burger-box" id="burger" onClick={handleOverlayClick}>
-                                <span></span>
-                                <span></span>
-                                <span className="burger-top"></span>
-                                <span></span>
-                                <span className="burger-btm"></span>
-                                <span></span>
-                            </div>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
-
-            {/* Overlay */}
-            <div className="overlay-wrap" id="overlay" ref={overlayRef}>
-                <div className="overlay" id="sidebar" ref={sidebarRef} onClick={stopPropagation}>
-                    <div className="head">
-                        <ul className="menu">
-                            <div className="burger-box" id="burger" onClick={handleOverlayClick}>
-                                <span></span>
-                                <span></span>
-                                <span className="burger-top"></span>
-                                <span></span>
-                                <span className="burger-btm"></span>
-                                <span></span>
-                            </div>
-                        </ul>
-                    </div>
-                    <div className="body">
-                        <h2>Account</h2>
-                        <ul>
-                            <li>
-                                <a href="">Calendar</a>
-                            </li>
-                            <li>
-                                <a href="">Todo List</a>
-                            </li>
-                            <li>
-                                <a href="">Setting</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <Navbar/>
+            <Sidebar/>
 
             {/* Content */}
             <main className="content">
