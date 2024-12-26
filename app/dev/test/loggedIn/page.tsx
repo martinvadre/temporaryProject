@@ -1,7 +1,7 @@
 "use client"
 import { useSession } from "next-auth/react"
 import { DefaultSession } from "next-auth"
-import { SignOut } from "@/dev/components/logoutBtn"
+import { SignOutBtn } from "@/dev/components/logoutBtn"
 
 export default function Dashboard() {
    const { data: session } = useSession()
@@ -23,7 +23,7 @@ export default function Dashboard() {
       <div>
          <h1>Dashboard</h1>
          <p>Welcome {session.user?.name} to the dashboard!</p>
-         <SignOut></SignOut>
+         <SignOutBtn></SignOutBtn>
       </div>
    )
 }

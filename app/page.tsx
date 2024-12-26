@@ -8,28 +8,27 @@ import { useSession } from "next-auth/react";
 
 
 export default function Home(): JSX.Element {
-   const { data: session } = useSession()
-   const [greeting, setGreeting] = useState<string>("");
+    const { data: session } = useSession()
+    const [greeting, setGreeting] = useState<string>("");
 
-   useEffect(() => {
-      navHandler();
-   }, []);
+    useEffect(() => {
+       navHandler();
+    }, []);
 
-   useEffect(() => {
-      const date = new Date();
-      const hour = date.getHours();
-
-      if (hour < 12) {
-         setGreeting("Good Morning");
-      }
-      else if (hour < 18) {
-         setGreeting("Good Afternoon");
-      }
-      else {
-         setGreeting("Good Evening");
-      }
-   }
-   , []);
+    useEffect(() => {
+       const date = new Date();
+       const hour = date.getHours();
+ 
+       if (hour < 12) {
+          setGreeting("Good Morning");
+       }
+       else if (hour < 18) {
+          setGreeting("Good Afternoon");
+       }
+       else {
+          setGreeting("Good Evening");
+       }
+    }, []);
 
     return (
         <>
@@ -41,7 +40,7 @@ export default function Home(): JSX.Element {
                 <section className="intro-box">
                     <div className="welcome-box">
                         <div className="head" id="userInfo">
-                            <h2>{greeting}, <span id="username">{session?.user?.name}</span></h2>
+                            <h2>{greeting}, <span id="username">{session?.user?.name?.split(" ")[0]}</span></h2>
                         </div>
                     </div>
                 </section>
