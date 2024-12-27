@@ -50,7 +50,7 @@ export default function Home(): JSX.Element {
                 </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-        {/* <main className="content"> */}
+        <main className="content">
             <section className="intro-box">
                 <div className="welcome-box">
                     <div className="head" id="userInfo">
@@ -74,7 +74,7 @@ export default function Home(): JSX.Element {
                     <div className="body"></div>
                 </div>
             </section>
-        {/* </main> */}
+        </main>
 
         {/* <footer>
             <div className="fixed-footer">
