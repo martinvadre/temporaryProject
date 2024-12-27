@@ -1,8 +1,13 @@
 import React from "react";
 
-const Burger: React.FC = () => {
+interface BurgerButtonProps {
+   collapsed: boolean;
+   setCollapsed: () => void;
+ }
+
+const Burger: React.FC<BurgerButtonProps> = ({ collapsed, setCollapsed }) => {
     return (
-        <div className="burger-box">
+        <div className="md:hidden burger-box" onClick={setCollapsed}>
             <div className="burger" id="burger">
                 <span></span>
                 <span></span>

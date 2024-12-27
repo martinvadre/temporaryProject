@@ -1,14 +1,29 @@
 import React from "react";
 import Burger from "@/components/navbar/burger";
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+    collapsed: boolean;
+    setCollapsed: () => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({collapsed, setCollapsed}: SidebarProps) => {
+
+    const overlay = document.getElementById('overlay');
+
+    if (collapsed) {
+        overlay?.classList.add('active');
+    }
+    else {
+        overlay?.classList.remove('active');
+    }
+
     return (
-        <div className="overlay-wrap" id="overlay">
+        <div onClick={setCollapsed} className="overlay-wrap" id="overlay">
             <div className="overlay" id="sidebar">
                 <div className="sidebar-wrap">
                     <div className="head">
                         <ul className="menu">
-                           <Burger/>
+                           <Burger collapsed={collapsed} setCollapsed={setCollapsed}/>
                         </ul>
                     </div>
                     <div className="body">
