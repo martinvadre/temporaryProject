@@ -22,7 +22,7 @@ export default function Dashboard() {
    return (
       <div>
          <h1>Dashboard</h1>
-         <p>Welcome {session.user?.name} to the dashboard!</p>
+         <p>Welcome {session.user?.name?.split(" ")[0]} to the dashboard!</p>
          <SignOutBtn></SignOutBtn>
       </div>
    )

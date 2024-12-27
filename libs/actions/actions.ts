@@ -10,7 +10,7 @@ interface CustomUser extends User {
 }
 
 export async function googleSignInAction() {
-   await signIn("google", { redirect: true, callbackUrl: "/dev/test/loggedIn" })
+   await signIn("google", { redirect: true, callbackUrl: "" })
 }
 
 export async function emailSignUpAction(prevState: Record<string, string | number | CustomUser>, formData: FormData) {
