@@ -4,55 +4,20 @@ import React from 'react'
 export default function SignInWithCredencial() {
 
    return (
-      <div className='className="mx-auto p-6 bg-white rounded-lg shadow-md max-h-full max-w-fit"'>
-         <form action={emailSignInAction} >
-            <h2 className="text-2xl font-bold mb-6 text-center">Sign In (TEST)</h2>
-            <div className="mb-4 flex flex-col">
-               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                  Email
-               </label>
-               <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  name='email'
-               />
-            </div>
-            <div className="mb-6 flex flex-col">
-               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                  Password
-               </label>
-               <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  name='password'
-               />
-            </div>
-            <div className="flex items-center justify-between">
-               <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  type="submit"
-               >
-                  Sign In
-               </button>
-            </div>
-            <div className="flex items-center justify-center my-4">
-               <span className="text-gray-500">or</span>
-            </div>
-            <div className="mt-4 flex items-center justify-center">
+      <div className="bg-white w-full max-w-[480px] p-[1.2rem]">
+         <div>
+            <h2 className="font-medium text-[20px] mb-[20px] text-center">Login (TEST)</h2>
+            <form action={googleSignInAction}>
+               <button className="w-full py-2 border border-[#cecece] text-[#777777] rounded-full text-lg cursor-pointer transition ease-in-out duration-150 hover:border-[#999999] hover:text-[#555555]" type="submit">Contiue with Google</button>
+            </form>
+            <span className="font-normal text-[12px] leading-[1.5] text-[#777777] my-[20px] text-center">or</span>
+            <form action={emailSignInAction} >
+                  <input className="w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="email" type="email" placeholder="Email" name='email'/>
+                  <input className="w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="password" type="password" placeholder="Password" name='password'/>
+                  <button className="w-full p-[10px] mt-[20px] bg-[#323232] text-white rounded-full text-[16px] cursor-pointer transition ease duration-200 hover:bg-[#000000]" type="submit">Sign In</button>
+            </form>
+            <p className="font-normal text-[12px] leading-[1.5] text-[#777777] my-[20px] text-center">New user? <a className="text-[#323232]" href="/signup">Sign up</a></p>
          </div>
-         </form>
-         <form action={googleSignInAction}>
-            <button
-               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-               type="submit"
-            >
-               Sign In with Google
-            </button>
-         </form>
       </div>
    )
 }

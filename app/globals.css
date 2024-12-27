@@ -29,8 +29,11 @@ html {
 
 body {
     background: #ffffff;
+    display: flex;
     justify-content: center;
-    transition: ease .25s;
+    align-items: center;
+    height: 100dvh;
+    margin: 0;
 }
 
 /* nav */

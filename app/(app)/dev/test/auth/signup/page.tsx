@@ -12,67 +12,18 @@ export default function SignUpPage(): JSX.Element {
 
 
    return (
-      <div>
-         <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+      <div className="bg-white w-full max-w-[480px] p-[1.2rem]">
+         <div>
+            <h2 className="font-medium text-[20px] mb-[20px] text-center">Sign Up</h2>
             <form action={formAction}>
-               <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                     Name
-                  </label>
-                  <input
-                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                     id="name"
-                     name='name'
-                     type="text"
-                     placeholder="Name"
-                  />
-               </div>
-               <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                     Email
-                  </label>
-                  <input
-                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                     id="email"
-                     name='email'
-                     type="email"
-                     placeholder="Email"
-                  />
-               </div>
-               <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                     Password
-                  </label>
-                  <input
-                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                     id="password"
-                     name='password'
-                     type="password"
-                     placeholder="Password"
-                  />
-               </div>
-               <div className="mb-6">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirm-password">
-                     Confirm Password
-                  </label>
-                  <input
-                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                     id="confirm-password"
-                     name='confirm-password'
-                     type="password"
-                     placeholder="Confirm Password"
-                  />
-               </div>
-               <div className="flex items-center justify-between">
-                  <button
-                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                     type="submit"
-                  >
-                     Sign Up
-                  </button>
-               </div>
+               <input className="w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="name" name='Name' type="text" placeholder="Name"/>
+               <input className="w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="email" name='Email' type="email" placeholder="Email"/>
+               <input className="w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="password" name='Password' type="password" placeholder="Password"/>
+               <input className="w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="confirm-password" name='Confirm Password' type="password" placeholder="Confirm Password"/>
+               <button className="w-full p-[10px] mt-[20px] bg-[#323232] text-white rounded-full text-[16px] cursor-pointer transition ease duration-200 hover:bg-[#000000]" type="submit">Sign Up</button>
             </form>
+            <p className="font-normal text-[12px] leading-[1.5] text-[#777777] my-[20px] text-center">By clicking Sign up, I agree to Afterlearner’s <a className="text-[#323232]" href="#">Terms</a> and <a href="#">Privacy Policy</a></p>
+            <p className="font-normal text-[12px] leading-[1.5] text-[#777777] my-[20px] text-center">Already have an account? <a className="text-[#323232]" href="/dev/test/auth/signin">Sign In</a></p>
          </div>
       </div>
    )
