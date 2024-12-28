@@ -39,18 +39,18 @@ export default function Home(): JSX.Element {
     }, []);
 
     return (
-        <div className="mt-20 mx-[3.7rem]">
-            <Breadcrumb className="mb-4">
-                <BreadcrumbList>
-                <BreadcrumbItem>
-                    <BreadcrumbLink asChild>
-                    <Link href="/">Home</Link>
-                    </BreadcrumbLink>
-                </BreadcrumbItem>
-                </BreadcrumbList>
-            </Breadcrumb>
+        <div className="content">
             <div>
                 <div className="intro-box">
+                    <Breadcrumb className="breadcrum">
+                        <BreadcrumbList>
+                        <BreadcrumbItem>
+                            <BreadcrumbLink asChild>
+                                <Link href="/">Home</Link>
+                            </BreadcrumbLink>
+                        </BreadcrumbItem>
+                        </BreadcrumbList>
+                    </Breadcrumb>
                     <div className="welcome-box">
                         <div className="head" id="userInfo">
                             <h2>{greeting}, <span id="username">{session?.user?.name?.split(" ")[0]}</span></h2>
@@ -75,11 +75,11 @@ export default function Home(): JSX.Element {
                 </section>
             </div>
 
-        {/* <footer>
-            <div className="fixed-footer">
-                <p className="current">Home <span className="lower early">{">"}</span></p>
-            </div>
-        </footer> */}
+            {/* <footer>
+                <div className="fixed-footer">
+                    <p className="current">Home <span className="lower early">{">"}</span></p>
+                </div>
+            </footer> */}
         </div>
     );
 }
