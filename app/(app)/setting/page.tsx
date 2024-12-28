@@ -4,7 +4,7 @@ import { JSX ,useEffect, useState } from "react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 
-export default function CalendarPG(): JSX.Element {
+export default function SettingPG(): JSX.Element {
 
     return (
         <div className="mt-20 mx-[3.7rem]">
@@ -18,13 +18,13 @@ export default function CalendarPG(): JSX.Element {
                 <BreadcrumbSeparator/>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link href="/calendar">Calendar</Link>
+                        <Link href="/setting">Setting</Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
             <div>
-                <h1>Calender Page</h1>
+                <h1>Setting Page</h1>
             </div>
         </div>
     );

@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useLockedBody } from "../hooks/useBodyLock";
 import Navbar from "../navbar/navbar";
 import SidebarNew from "../sidebar/newSidebar";
 import Sidebar from "../sidebar/sidebar";

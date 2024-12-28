@@ -5,7 +5,6 @@ import { navHandler } from "@/libs/utils/navbarHandler";
 import Navbar from "@/components/navbar/navbar";
 import Sidebar from "@/components/sidebar/sidebar";
 import { useSession } from "next-auth/react";
-import { ContentLayout } from "@/components/panel/content-layout";
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb";
 import Link from "next/link";
@@ -40,8 +39,8 @@ export default function Home(): JSX.Element {
     }, []);
 
     return (
-        <ContentLayout title="Home">
-            <Breadcrumb className="mb-4 pl-[1.2rem]">
+        <div className="mt-20 mx-[3.7rem]">
+            <Breadcrumb className="mb-4">
                 <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
@@ -50,37 +49,37 @@ export default function Home(): JSX.Element {
                 </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-        <main className="content">
-            <section className="intro-box">
-                <div className="welcome-box">
-                    <div className="head" id="userInfo">
-                        <h2>{greeting}, <span id="username">{session?.user?.name?.split(" ")[0]}</span></h2>
+            <div>
+                <div className="intro-box">
+                    <div className="welcome-box">
+                        <div className="head" id="userInfo">
+                            <h2>{greeting}, <span id="username">{session?.user?.name?.split(" ")[0]}</span></h2>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-            {/* Section */}
-            <section className="h-full card-container">
-                <div className="card-wrap sche-card">
-                    <h1 className="head">Sche</h1>
-                    <div className="body"></div>
-                </div>
-                <div className="card-wrap todo-card">
-                    <h1 className="head">Todo</h1>
-                    <div className="body"></div>
-                </div>
-                <div className="card-wrap note-card">
-                    <h1 className="head">Note</h1>
-                    <div className="body"></div>
-                </div>
-            </section>
-        </main>
+                {/* Section */}
+                <section className="h-full card-container">
+                    <div className="card-wrap sche-card">
+                        <h1 className="head">Sche</h1>
+                        <div className="body"></div>
+                    </div>
+                    <div className="card-wrap todo-card">
+                        <h1 className="head">Todo</h1>
+                        <div className="body"></div>
+                    </div>
+                    <div className="card-wrap note-card">
+                        <h1 className="head">Note</h1>
+                        <div className="body"></div>
+                    </div>
+                </section>
+            </div>
 
         {/* <footer>
             <div className="fixed-footer">
                 <p className="current">Home <span className="lower early">{">"}</span></p>
             </div>
         </footer> */}
-        </ContentLayout>
+        </div>
     );
 }

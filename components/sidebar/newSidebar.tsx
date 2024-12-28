@@ -10,27 +10,7 @@ interface SidebarProps {
 
 export default function SidebarNew ({collapsed, setCollapsed}: SidebarProps): JSX.Element {
 
-    // const overlay = document.getElementById('overlay');
-
-    // if (collapsed) {
-    //     overlay?.classList.add('active');
-    // }
-    // else {
-    //     overlay?.classList.remove('active');
-    // }
-
-    // useEffect(() => {
-    //     const overlay = document.getElementById('overlay');
-
-    //     console.log(collapsed);
-
-    //     if (collapsed) {
-    //         overlay?.classList.add('active');
-    //     }
-    //     else {
-    //         overlay?.classList.remove('active');
-    //     }
-    // }, [collapsed]);
+    // IGNORE THIS FUNCTION FOR NOW
 
     return (
         <aside className="h-screen z-[20] sticky top-0">

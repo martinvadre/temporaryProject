@@ -1,5 +1,7 @@
 import React from "react";
 import Burger from "@/components/navbar/burger";
+import Link from "next/link";
+import { sidebarList } from "@/lib/sidebarList";
 
 interface SidebarProps {
     collapsed: boolean;
@@ -7,17 +9,6 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({collapsed, setCollapsed}: SidebarProps) => {
-
-    // const overlay = document.getElementById('overlay');
-
-    // if (collapsed) {
-    //     overlay?.classList.add('active');
-    // }
-    // else {
-    //     overlay?.classList.remove('active');
-    // }
-
-    // console.log(collapsed);
 
     const toggleSidebar = () => {
         setCollapsed();
@@ -35,9 +26,15 @@ const Sidebar: React.FC<SidebarProps> = ({collapsed, setCollapsed}: SidebarProps
                     <div className="body">
                         <h2 className="account">Account</h2>
                         <ul>
-                            <li><a href="">Calendar</a></li>
-                            <li><a href="">Todo List</a></li>
-                            <li><a href="">Setting</a></li>
+                            {
+                                sidebarList.map((item, index) => (
+                                    <li key={index}>
+                                        <Link prefetch={true} href={item.path}>
+                                            {item.name}
+                                        </Link>
+                                    </li>
+                                ))
+                            }
                         </ul>
                     </div>
                 </div>
