@@ -7,7 +7,7 @@ interface BurgerButtonProps {
 
 const Burger: React.FC<BurgerButtonProps> = ({ collapsed, setCollapsed }) => {
     return (
-        <div className="md:hidden burger-box" onClick={setCollapsed}>
+        <div className="burger-box" onClick={setCollapsed}>
             <div className="burger" id="burger">
                 <span></span>
                 <span></span>

@@ -11,15 +11,15 @@ const Navbar: React.FC<NavbarProps> = ({ collapsed, setCollapsed, children }: Na
 
     return (
         <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-            <div role="banner">
+            <header role="banner">
                 <nav className="navbar">
                     <div className="nav-wrap">
-                        <div className="menu xl:p-[0.8rem]">
+                        <ul className="menu">
                             <Burger collapsed={collapsed} setCollapsed={setCollapsed}/>
-                        </div>
+                        </ul>
                     </div>
                 </nav>
-            </div>
+            </header>
             {children}
         </div>
     );

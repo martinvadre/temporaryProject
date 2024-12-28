@@ -3,7 +3,7 @@ import SignInWithCredencial from '@/dev/components/signInWithCredencial'
 
 export default function SignInPG(): JSX.Element {
   return (
-    <div>
+    <div className='flex justify-center items-center h-screen'>
       <SignInWithCredencial/>
    </div>
   )

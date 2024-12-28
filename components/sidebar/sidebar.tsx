@@ -8,22 +8,28 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({collapsed, setCollapsed}: SidebarProps) => {
 
-    const overlay = document.getElementById('overlay');
+    // const overlay = document.getElementById('overlay');
 
-    if (collapsed) {
-        overlay?.classList.add('active');
-    }
-    else {
-        overlay?.classList.remove('active');
-    }
+    // if (collapsed) {
+    //     overlay?.classList.add('active');
+    // }
+    // else {
+    //     overlay?.classList.remove('active');
+    // }
+
+    // console.log(collapsed);
+
+    const toggleSidebar = () => {
+        setCollapsed();
+    };
 
     return (
-        <div onClick={setCollapsed} className="overlay-wrap" id="overlay">
+        <div onClick={toggleSidebar} className={`overlay-wrap ${collapsed ? "flex" : "hidden"}`} id="overlay">
             <div className="overlay" id="sidebar">
                 <div className="sidebar-wrap">
                     <div className="head">
-                        <ul className="menu">
-                           <Burger collapsed={collapsed} setCollapsed={setCollapsed}/>
+                        <ul onClick={toggleSidebar} className="menu">
+                           <Burger collapsed={collapsed} setCollapsed={toggleSidebar}/>
                         </ul>
                     </div>
                     <div className="body">
