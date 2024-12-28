@@ -5,7 +5,7 @@ export default function SignInWithCredencial() {
 
    return (
       <div className="bg-white w-full max-w-[480px] p-[1.2rem]">
-         <h2 className="font-medium text-[20px] mb-[20px] text-center">Login (TEST)</h2>
+         <h2 className="font-medium text-[20px] mb-[20px] text-center">Login</h2>
          <form action={googleSignInAction}>
             <button className="w-full py-2 border border-[#cecece] text-[#777777] rounded-full text-lg cursor-pointer transition ease duration-250 hover:border-[#323232] hover:text-[#323232]" type="submit">Contiue with Google</button>
          </form>

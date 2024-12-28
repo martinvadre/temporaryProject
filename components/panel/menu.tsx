@@ -33,22 +33,13 @@ export function Menu({ isOpen }: MenuProps) {
           {menuList.map(({ groupLabel, menus }, index) => (
             <li className={cn("w-full", groupLabel ? "pt-5" : "")} key={index}>
               {(isOpen && groupLabel) || isOpen === undefined ? (
-                <h2 className="text-xl font-bold px-4 pb-2 max-w-[248px] truncate">
+                <h2 className="text-lg font-bold px-[.5rem] py-[.25rem] max-w-[248px] truncate">
                   {groupLabel}
                 </h2>
               ) : !isOpen && isOpen !== undefined && groupLabel ? (
-                <TooltipProvider>
-                  <Tooltip delayDuration={100}>
-                    <TooltipTrigger className="w-full">
-                      <div className="w-full flex justify-center items-center">
-                        <Ellipsis className="h-5 w-5" />
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent side="right">
-                      <p>{groupLabel}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <h2 className="text-lg font-bold px-[.5rem] py-[.25rem] max-w-[248px] truncate opacity-0">
+                  {groupLabel}
+                </h2>
               ) : (
                 <p className="pb-2"></p>
               )}
@@ -66,13 +57,11 @@ export function Menu({ isOpen }: MenuProps) {
                                   :
                                     "ghost"
                               }
-                              className="w-full justify-start h-10 mb-1"
+                              className="w-full justify-start px-[.5rem] mb-1 rounded-[8px]"
                               asChild
                             >
                               <Link href={href}>
-                                <span
-                                  className={cn(isOpen === false ? "" : "mr-4")}
-                                >
+                                <span className={cn(isOpen === false ? "" : "")}>
                                   <Icon size={18} />
                                 </span>
                                 <p
@@ -120,10 +109,10 @@ export function Menu({ isOpen }: MenuProps) {
                 <TooltipTrigger asChild>
                   <Button
                     onClick={() => {
-                        signOut({ callbackUrl: "/dev/test" });
+                        signOut({ callbackUrl: "/auth/signin" });
                     }}
                     variant="outline"
-                    className="w-full justify-center h-10 mt-5"
+                    className="w-full justify-center h-10 mt-5 rounded-[8px]"
                   >
                     <span className={cn(isOpen === false ? "" : "mr-4")}>
                       <LogOut size={18} />

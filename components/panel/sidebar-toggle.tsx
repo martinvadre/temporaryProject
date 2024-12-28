@@ -10,14 +10,10 @@ interface SidebarToggleProps {
 
 export function SidebarToggle({ isOpen, setIsOpen }: SidebarToggleProps) {
   return (
-    <div className={`invisible ${!isOpen ? "pt-7" : "pt-0"} transition-transform ease-in-out duration-300 lg:visible absolute top-[5px] ${!isOpen ? "pl-[28px]" : "-right-[18px]"} z-20`}>
-      <Button
-        onClick={() => setIsOpen?.()}
-        className={`rounded-md ${!isOpen ? "w-8" : "w-8"} h-8`}
-        variant={!isOpen ? "ghost" : "outline"}
-      >
+    <div className={`invisible transition-transform ease-in-out duration-300 lg:visible absolute mt-[5px] ml-[1.2rem] z-20`}>
+      <Button onClick={() => setIsOpen?.()} className={`rounded-[8px] ${!isOpen ? "w-8" : "w-8"} h-8`} variant={"ghost"}>
         <div className="burger-box">
-            <div className={`burger h-[16px] ${!isOpen ? "w-[18px]" : "w-[16px]"}`} id="burger">
+            <div className={`burger h-[16px] ${!isOpen ? "w-[18px]" : "w-[18px]"}`} id="burger">
                 <span></span>
                 <span></span>
                 <span className={`burger-top`}></span>
