@@ -88,7 +88,7 @@ body {
     align-items: flex-start;
     justify-content: flex-start;
     z-index: 1001;
-    background: rgba(0, 0, 0, 0.25);
+    /* background: rgba(0, 0, 0, 0.25); */
     /* animation: overlay-load var(--overlay-load-time) ease; */
 }
 .overlay-wrap.active {
