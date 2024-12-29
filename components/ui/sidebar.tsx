@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
-import { Sheet, SheetContent } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetDescription } from "@/components/ui/sheet"
 import { Skeleton } from "@/components/ui/skeleton"
 import {
   Tooltip,
@@ -18,6 +18,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { SheetTitle } from "./oldSheet"
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -197,8 +198,9 @@ const Sidebar = React.forwardRef<
         <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
           <SheetContent
             data-sidebar="sidebar"
+            aria-describedby={undefined}
             data-mobile="true"
-            className="w-[--sidebar-width] bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+            className="w-[--sidebar-width] bg-sidebar mt-[3.55rem] p-0 text-sidebar-foreground [&>button]:hidden"
             style={
               {
                 "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -263,25 +265,37 @@ const SidebarTrigger = React.forwardRef<
   React.ElementRef<typeof Button>,
   React.ComponentProps<typeof Button>
 >(({ className, onClick, ...props }, ref) => {
-  const { toggleSidebar } = useSidebar()
+    const { toggleSidebar, isMobile, openMobile, setOpenMobile } = useSidebar()
 
-  return (
-    <Button
-      ref={ref}
-      data-sidebar="trigger"
-      variant="ghost"
-      size="icon"
-      className={cn("h-7 w-7", className)}
-      onClick={(event) => {
+    function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
         onClick?.(event)
-        toggleSidebar()
-      }}
-      {...props}
-    >
-      <PanelLeft />
-      <span className="sr-only">Toggle Sidebar</span>
-    </Button>
-  )
+        console.log("clicked")
+        if (isMobile) {
+            setOpenMobile(!openMobile)
+        }
+        else {
+            toggleSidebar()
+        }
+    }
+
+    return (
+        <Button
+            ref={ref}
+            data-sidebar="trigger"
+            variant="ghost"
+            className={cn("burger-box", className)}
+            onClick={handleClick}
+            {...props}
+        >
+            <div className="burger" id="burger">
+                <span></span>
+                <span className="burger-top"></span>
+                <span></span>
+                <span className="burger-btm"></span>
+                <span></span>
+            </div>
+        </Button>
+    )
 })
 SidebarTrigger.displayName = "SidebarTrigger"
 

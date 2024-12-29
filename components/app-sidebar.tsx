@@ -1,14 +1,41 @@
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader } from "@/components/ui/sidebar"
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, useSidebar } from "@/components/ui/sidebar"
+import Navbar from "./navbar/navbar"
+import { sidebarList, SidebarList } from "@/lib/sidebarList"
+import Link from "next/link"
 
 export default function AppSidebar() {
     return (
-        <Sidebar variant="sidebar">
-            <SidebarHeader>Hello</SidebarHeader>
-            <SidebarContent>
-                <SidebarGroup />
-                <SidebarGroup />
-            </SidebarContent>
-            <SidebarFooter />
-        </Sidebar>
+        <section className="flex flex-col h-screen">
+            <Navbar />
+            <Sidebar variant="sidebar">
+                <div className="lg:mt-[4rem] md:mt-[4rem]">
+                    <SidebarContent>
+                        <SidebarGroup>
+                            <SidebarGroupLabel>
+                                Account
+                            </SidebarGroupLabel>
+                            <SidebarGroupContent>
+                                <SidebarMenu>
+                                    {
+                                        sidebarList.map(({name, path, icon: Icon}, index: number) => (
+                                            <SidebarMenuItem key={index}>
+                                                <SidebarMenuButton asChild>
+                                                    <Link replace prefetch={true} href={path}>
+                                                        <span>
+                                                            <Icon size={18} />
+                                                        </span>
+                                                        {name}
+                                                    </Link>
+                                                </SidebarMenuButton>
+                                            </SidebarMenuItem>
+                                        ))
+                                    }
+                                </SidebarMenu>
+                            </SidebarGroupContent>
+                        </SidebarGroup>
+                    </SidebarContent>
+                </div>
+            </Sidebar>
+        </section>
     )
 }
