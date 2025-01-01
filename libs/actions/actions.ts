@@ -84,7 +84,7 @@ export async function emailSignInAction(prevState: Record<string, string | numbe
         if (error instanceof AuthError) {
 
             if (error.cause?.type === 'Verification') {
-                return { "status": 400, "message": "User not activated"};;
+                return { "status": 400, "message": "User not found"};;
             }
 
             switch (error.type) {

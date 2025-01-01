@@ -51,11 +51,7 @@ export async function getUser(email: string): Promise<Record<string, string | Us
     });
 
     if (!user) {
-        return { "status": "error", "message": "User not found" };
-    }
-
-    if (user.emailVerified == null) {
-        return { "status": "error", "message": "Email not verified" };
+        return { "status": "error", "message": "User not found"};
     }
 
     return { "status": "success", "message": "User found successfully", "user": user };

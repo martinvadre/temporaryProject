@@ -178,7 +178,7 @@ export default function SignUpPage(): JSX.Element {
                                 {
                                     form.formState.errors.email && <FormMessage className='mt-[3px] ml-[1px]'>{form.formState.errors.email.message}</FormMessage>
                                 }
-                                <CButton disabled={(!(password == confirmPassword && !passwordError.isError && form.getValues().name != "" && form.getValues().email != ""))} isLoading={isPending} className="w-full p-[10px] mt-[20px] bg-[#323232] text-white rounded-full text-[16px] cursor-pointer transition ease duration-250 h-auto hover:bg-[#000000]" type="submit">Sign Up</CButton>
+                                <CButton isDisabled={(!(password == confirmPassword && !passwordError.isError && form.getValues().name != "" && form.getValues().email != ""))} isLoading={isPending} className="w-full p-[10px] mt-[20px] bg-[#323232] text-white rounded-full text-[16px] cursor-pointer transition ease duration-250 h-auto hover:bg-[#000000]" type="submit">Sign Up</CButton>
                             </form>
                         </Form>
                     )

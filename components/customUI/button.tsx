@@ -6,13 +6,15 @@ interface CButtonProps {
     children: ReactNode;
     variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null;
     isLoading?: boolean;
+    isDisabled?: boolean;
     [key: string]: any;
 }
 
-export default function CButton({ children, variant, isLoading, ...props }: CButtonProps) {
+export default function CButton({ children, variant, isLoading, isDisabled, ...props }: CButtonProps) {
     return (
         <Button
-            disabled={isLoading}
+            style={{pointerEvents: isLoading || isDisabled ? "none" : "auto"}}
+            disabled={isLoading || isDisabled}
             variant={variant}
             {...props}
         >

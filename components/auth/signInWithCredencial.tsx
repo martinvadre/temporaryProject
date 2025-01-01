@@ -55,7 +55,7 @@ export default function SignInWithCredencial() {
              });
 
             const timeoutId = setTimeout(() => {
-                window.location.href = "/dev/test/loggedIn"
+                window.location.href = "/"
             }, 2000)
 
             return () => clearTimeout(timeoutId)
@@ -93,7 +93,7 @@ export default function SignInWithCredencial() {
                     {
                         form.formState.errors.password && <FormMessage className="mt-[3px] ml-[1px]">{form.formState.errors.password.message}</FormMessage>
                     }
-                    <CButton isLoading={isPending || response.status == 200} disabled={!(form.getValues().password != "" && form.getValues().email != "")} className="w-full h-auto p-[10px] mt-[20px] bg-[#323232] text-white rounded-full text-[16px] cursor-pointer transition ease duration-250 hover:bg-[#000000]" type="submit">Sign In</CButton>
+                    <CButton isLoading={isPending || response.status == 200} isDisabled={!(form.getValues().password != "" && form.getValues().email != "")} className="w-full h-auto p-[10px] mt-[20px] bg-[#323232] text-white rounded-full text-[16px] cursor-pointer transition ease duration-250 hover:bg-[#000000]" type="submit">Sign In</CButton>
                 </form>
             </Form>
 

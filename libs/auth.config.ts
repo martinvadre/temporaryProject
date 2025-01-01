@@ -9,6 +9,7 @@
 interface CustomUser extends User {
     role?: string
     password?: string
+    emailVerified?: Date
 }
 
 export default {
@@ -30,6 +31,10 @@ export default {
                 const res = await getUser(email as string);
 
                 if (res.status == "error") {
+                    return null
+                }
+
+                if ((res.user as CustomUser).emailVerified === null) {
                     throw new AuthError(res.message as string, {
                         cause: {type: "Verification" }
                     });

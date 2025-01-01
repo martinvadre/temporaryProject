@@ -17,7 +17,7 @@ export default function Dashboard() {
 
 
     return (
-        <div className="mt-20 mx-[3.7rem]">
+        <div>
             <h1>Dashboard</h1>
             <p>Welcome {username} to the dashboard!</p>
             <SignOutBtn></SignOutBtn>
