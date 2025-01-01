@@ -1,5 +1,5 @@
     import GitHub from "next-auth/providers/github"
-    import type { NextAuthConfig, Session, User } from "next-auth"
+    import { AuthError, type NextAuthConfig, type Session, type User } from "next-auth"
     import Google from "next-auth/providers/google"
     import Credentials from "next-auth/providers/credentials"
     import { getUser } from "./userHandler"
@@ -30,7 +30,9 @@ export default {
                 const res = await getUser(email as string);
 
                 if (res.status == "error") {
-                    return null
+                    throw new AuthError(res.message as string, {
+                        cause: {type: "Verification" }
+                    });
                 }
 
                 if ((res.user as CustomUser).password == null) {
@@ -70,7 +72,7 @@ export default {
             return token
         },
         async session({session, token}) {
-            session.user.role = token.role
+            (session.user as CustomUser).role = token.role as string | undefined
             return {
                 ...session,
                 id : token.id as String,

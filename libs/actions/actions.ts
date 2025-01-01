@@ -2,16 +2,9 @@
 
 import { signIn } from "@/libs/auth"
 import { createUser } from "../userHandler";
-import { User } from "next-auth";
-import { redirect } from "next/navigation";
 import { generateVerificationToken } from "@/libs/utils/verification-token";
 import { sendVerificationEmail } from "@/libs/utils/mail";
-import { revalidatePath } from "next/cache";
-
-interface CustomUser extends User {
-   role?: string
-   password?: string
-}
+import { AuthError } from 'next-auth';
 
 export async function googleSignInAction() {
    await signIn("google", { redirect: true, callbackUrl: "/" })
@@ -22,6 +15,11 @@ interface emailSignUpActionProps {
     password: string
     confirm_password: string
     name: string
+}
+
+interface emailSignInActionProps {
+    email: string
+    password: string
 }
 
 export async function emailSignUpAction(prevState: Record<string, string | number>, formData: emailSignUpActionProps): Promise<Record<string, string | number>> {
@@ -69,18 +67,35 @@ export async function emailSignUpAction(prevState: Record<string, string | numbe
 
 }
 
-export async function emailSignInAction(formData: FormData) {
-    const email = formData.get("email")
-    const password = formData.get("password")
+export async function emailSignInAction(prevState: Record<string, string | number>, formData: emailSignInActionProps): Promise<Record<string, string | number>> {
+    const email = formData.email
+    const password = formData.password
 
     if (!email || !password) {
-        throw new Error("Please fill out all fields")
+        return {"status": 400, "message": "Please fill out all fields"}
     }
 
     try {
-        await signIn("credentials", { redirect: false, email, password })
+        await signIn("credentials", { redirect: false, email, password, callbackUrl: "/" })
+
+        return {"status": 200, "message": "Success"}
     }
     catch (error) {
-        console.log(error)
+        if (error instanceof AuthError) {
+
+            if (error.cause?.type === 'Verification') {
+                return { "status": 400, "message": "User not activated"};;
+            }
+
+            switch (error.type) {
+                case 'CredentialsSignin':
+                    return { "status": 400, "message": 'Invalid email or password.'};
+
+                default:
+                    return { "status": 400, "message": error.message };
+            }
+        }
+
+        throw error;
     }
 }

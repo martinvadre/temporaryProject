@@ -3,8 +3,7 @@
 import { JSX, Suspense } from 'react'
 import { createUser, getUser } from '@/libs/userHandler'
 import { signIn } from '@/libs/auth'
-import SignInWithCredencial from '@/dev/components/signInWithCredencial'
-import { ContentLayout } from '@/components/panel/content-layout'
+import SignInWithCredencial from '@/components/auth/signInWithCredencial'
 
 export default function TestPg(): JSX.Element {
 
@@ -14,13 +13,13 @@ export default function TestPg(): JSX.Element {
    }
 
    return (
-    <ContentLayout title="Test">
+    <div>
         <div>
             <button onClick={test2}>Test</button>
         </div>
         <div>
             <SignInWithCredencial />
         </div>
-    </ContentLayout>
+    </div>
   )
 }

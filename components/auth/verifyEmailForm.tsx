@@ -53,7 +53,9 @@ export default function VerifyEmailForm(): JSX.Element {
                 </CardHeader>
                 <CardContent>
                     {error == "" && success == "" && (
-                        <BeatLoader />
+                        <div className="flex items-center justify-center">
+                            <BeatLoader/>
+                        </div>
                     )}
                     {
                         error != "" && (

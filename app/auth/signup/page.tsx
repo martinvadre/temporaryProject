@@ -1,17 +1,17 @@
 "use client"
 
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
+import { Card } from '@/components/ui/card'
 import { emailSignUpAction } from '@/libs/actions/actions'
 import { JSX, useActionState, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { signUpSchema } from '@/libs/schemas/schemas'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { useFormAction } from '@/libs/hooks/useFormAction'
 import CButton from '@/components/customUI/button'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 
 interface PasswordErrorState {
     isUpper: boolean
@@ -21,13 +21,14 @@ interface PasswordErrorState {
     isLong: boolean
     isError: boolean
     password: string
- }
+}
 
 export default function SignUpPage(): JSX.Element {
-    const [response, formAction, isPending] = useActionState(emailSignUpAction, {"status": 0, "message": ""})
-    const [passwordError, setPasswordError] = useState<PasswordErrorState>({isUpper: true, isLower: true, isSpecial: true, isNumber: true, isError: true, isLong: true, password: ""})
-    const [password, setPassword] = useState<string>("")
-    const [confirmPassword, setConfirmPassword] = useState<string>("")
+    const [response, formAction, isPending] = useActionState(emailSignUpAction, {"status": 0, "message": ""});
+    const [passwordError, setPasswordError] = useState<PasswordErrorState>({isUpper: true, isLower: true, isSpecial: true, isNumber: true, isError: true, isLong: true, password: ""});
+    const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
+    const [toastId, setToastId] = useState<string>("GAY");
 
 
     const passwordValidation = (password: string): void => {
@@ -70,6 +71,35 @@ export default function SignUpPage(): JSX.Element {
         return () => subscription.unsubscribe();
     }, [form]);
 
+    const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
+        await formAction(data)
+
+        toast.loading("Sign up...", {
+            id: toastId
+        })
+    }
+
+    useEffect(() => {
+        if (!response.status) {
+            return;
+        }
+
+        if (response.status != 200) {
+            toast.error(response?.message as string, {
+                id: toastId
+            });
+        }
+
+        else if (response.status == 200) {
+            form.reset()
+
+            toast.success(response?.message as string, {
+                id: toastId
+            });
+
+        }
+    }, [isPending, response, toastId])
+
     // Old style
     //    return (
     //       <div className="bg-white w-full max-w-[480px] p-[1.2rem]">
@@ -97,11 +127,11 @@ export default function SignUpPage(): JSX.Element {
                     response.status != 200 &&
                     (
                         <Form {...form}>
-                            <form {...form.submitAction(formAction)}>
+                            <form {...form.submitAction(onSubmit)}>
                                 <FormField control={form.control} name="name" render={({ field }) => (
                                     <FormItem>
                                         <FormControl>
-                                            <Input disabled={isPending} {...field} className="font-inter w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="name" name='Name' type="text" placeholder="Name"/>
+                                            <Input disabled={isPending} {...field} className="font-inter h-auto w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="name" name='Name' type="text" placeholder="Name"/>
                                         </FormControl>
                                     </FormItem>
                                 )} />
@@ -109,7 +139,7 @@ export default function SignUpPage(): JSX.Element {
                                 <FormField control={form.control} name="email" render={({ field }) => (
                                     <FormItem>
                                         <FormControl>
-                                            <Input disabled={isPending} {...field} className="w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="email" name='Email' type="email" placeholder="Email"/>
+                                            <Input disabled={isPending} {...field} className="w-full h-auto p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="email" name='Email' type="email" placeholder="Email"/>
                                         </FormControl>
                                     </FormItem>
                                 )} />
@@ -117,7 +147,7 @@ export default function SignUpPage(): JSX.Element {
                                 <FormField control={form.control} name="password" render={({ field }) => (
                                     <FormItem>
                                         <FormControl>
-                                            <Input disabled={isPending} {...field} className="w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="password" name='Password' type="password" placeholder="Password"/>
+                                            <Input disabled={isPending} {...field} className="w-full h-auto p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="password" name='Password' type="password" placeholder="Password"/>
                                         </FormControl>
                                         <p className={`mb-[2px] lg:text-xs ${passwordError.password != "" ? !passwordError.isLong ? 'text-red-500' : 'text-success hidden' : 'text-gray-400'} ml-1`}>• 8 charactors</p>
                                         <p className={`mb-[2px] lg:text-xs ${passwordError.password != "" ? !passwordError.isLower || !passwordError.isUpper || !passwordError.isNumber || !passwordError.isSpecial ? 'text-red-500' : 'text-success hidden' : 'text-gray-400'} ml-1`}>• 1 lower, 1 upper, 1 number, 1 special character {"(# ? ! @)"}</p>
@@ -129,7 +159,7 @@ export default function SignUpPage(): JSX.Element {
                                         <FormField control={form.control} name="confirm_password" render={({ field }) => (
                                             <FormItem>
                                                 <FormControl>
-                                                    <Input disabled={isPending} {...field} className="w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="confirm-password" name='Confirm Password' type="password" placeholder="Confirm Password"/>
+                                                    <Input disabled={isPending} {...field} className="w-full h-auto p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="confirm-password" name='Confirm Password' type="password" placeholder="Confirm Password"/>
                                                 </FormControl>
                                                 <FormMessage/>
                                             </FormItem>
@@ -148,7 +178,7 @@ export default function SignUpPage(): JSX.Element {
                                 {
                                     form.formState.errors.email && <FormMessage className='mt-[3px] ml-[1px]'>{form.formState.errors.email.message}</FormMessage>
                                 }
-                                <CButton disabled={(!(password == confirmPassword && !passwordError.isError && form.getValues().name != "" && form.getValues().email != ""))} isLoading={isPending} className="w-full p-[10px] mt-[20px] bg-[#323232] text-white rounded-full text-[16px] cursor-pointer transition ease duration-250 hover:bg-[#000000]" type="submit">Sign Up</CButton>
+                                <CButton disabled={(!(password == confirmPassword && !passwordError.isError && form.getValues().name != "" && form.getValues().email != ""))} isLoading={isPending} className="w-full p-[10px] mt-[20px] bg-[#323232] text-white rounded-full text-[16px] cursor-pointer transition ease duration-250 h-auto hover:bg-[#000000]" type="submit">Sign Up</CButton>
                             </form>
                         </Form>
                     )

@@ -1,5 +1,5 @@
 import { JSX } from 'react'
-import SignInWithCredencial from '@/dev/components/signInWithCredencial'
+import SignInWithCredencial from '@/components/auth/signInWithCredencial'
 
 export default function SignInPG(): JSX.Element {
   return (
