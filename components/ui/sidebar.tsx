@@ -200,7 +200,7 @@ const Sidebar = React.forwardRef<
             data-sidebar="sidebar"
             aria-describedby={undefined}
             data-mobile="true"
-            className="w-[--sidebar-width] bg-sidebar mt-[3.55rem] p-0 text-sidebar-foreground [&>button]:hidden"
+            className="w-[--sidebar-width] bg-sidebar mt-[3.35rem] p-0 text-sidebar-foreground [&>button]:hidden"
             style={
               {
                 "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -283,7 +283,7 @@ const SidebarTrigger = React.forwardRef<
             ref={ref}
             data-sidebar="trigger"
             variant="ghost"
-            className={cn("burger-box", className)}
+            className={cn("burger-box p-[.7rem]", className)}
             onClick={handleClick}
             {...props}
         >
@@ -373,7 +373,7 @@ const SidebarHeader = React.forwardRef<
     <div
       ref={ref}
       data-sidebar="header"
-      className={cn("flex flex-col gap-2 p-2", className)}
+      className={cn("flex flex-col gap-2 pb-2", className)}
       {...props}
     />
   )
@@ -454,7 +454,7 @@ const SidebarGroupLabel = React.forwardRef<
       ref={ref}
       data-sidebar="group-label"
       className={cn(
-        "duration-200 flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/70 outline-none ring-sidebar-ring transition-[margin,opa] ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        "duration-200 flex h-8 shrink-0 items-center rounded-md px-[.7rem] text-xs font-medium text-sidebar-foreground/70 outline-none ring-sidebar-ring transition-[margin,opa] ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
         "group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
         className
       )}
@@ -531,9 +531,8 @@ const sidebarMenuButtonVariants = cva(
   {
     variants: {
       variant: {
-        default: "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-        outline:
-          "bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]",
+        default: "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground p-[.7rem]",
+        outline: "bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]",
       },
       size: {
         default: "h-8 text-sm",

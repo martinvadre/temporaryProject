@@ -88,10 +88,10 @@ export default function SignUpPage(): JSX.Element {
 
     return (
         <div className="flex items-center justify-center min-h-screen">
-            <Card className={`border-[#cecece] ${response.status == 200 ? "flex flex-col items-center justify-center" : ''} bg-white shadow-none border rounded-[8px] w-full max-w-[480px] p-[1.2rem]`}>
+            <Card className={`border-[#cecece] ${response.status == 200 ? "flex flex-col items-center justify-center" : ''} bg-white border rounded-[8px] w-full max-w-[480px] p-[1.2rem]`}>
                 <h2 className="font-medium text-[20px] mb-[20px] text-center">{ response.status !== 200 ? "Sign Up" : "Success"}</h2>
                 {
-                    response.status == 200 && <h2 className='mt-[3px] ml-[1px] justify-center items-center text-[20px] text-xl'>{response.message}</h2>
+                    response.status == 200 && <h2 className='mt-[3px] ml-[1px] justify-center items-center text-[20px]'>{response.message}</h2>
                 }
                 {
                     response.status != 200 &&
@@ -101,7 +101,7 @@ export default function SignUpPage(): JSX.Element {
                                 <FormField control={form.control} name="name" render={({ field }) => (
                                     <FormItem>
                                         <FormControl>
-                                            <Input disabled={isPending} {...field} className="font-inter w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="name" name='Name' type="text" placeholder="Name"/>
+                                            <Input disabled={isPending} {...field} className="w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="name" name='Name' type="text" placeholder="Name"/>
                                         </FormControl>
                                     </FormItem>
                                 )} />

@@ -1,7 +1,7 @@
 import React from "react";
 import Burger from "@/components/navbar/burger";
 import Link from "next/link";
-import { sidebarList } from "@/lib/sidebarList";
+import { home, sidebarList } from "@/lib/sidebarList";
 
 interface SidebarProps {
     collapsed: boolean;
