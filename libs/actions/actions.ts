@@ -3,6 +3,10 @@
 import { signIn } from "@/libs/auth"
 import { createUser } from "../userHandler";
 import { User } from "next-auth";
+import { redirect } from "next/navigation";
+import { generateVerificationToken } from "@/libs/utils/verification-token";
+import { sendVerificationEmail } from "@/libs/utils/mail";
+import { revalidatePath } from "next/cache";
 
 interface CustomUser extends User {
    role?: string
@@ -13,57 +17,70 @@ export async function googleSignInAction() {
    await signIn("google", { redirect: true, callbackUrl: "/" })
 }
 
-export async function emailSignUpAction(prevState: Record<string, string | number | CustomUser>, formData: FormData) {
-   const email = formData.get("email") as string;
-   const password = formData.get("password") as string;
-   const passwordConfirm = formData.get("confirm-password") as string;
-   const name = formData.get("name") as string;
+interface emailSignUpActionProps {
+    email: string
+    password: string
+    confirm_password: string
+    name: string
+}
 
-   if (password !== passwordConfirm) {
-      return {"status": 400, "message": "Passwords do not match"}
-   }
+export async function emailSignUpAction(prevState: Record<string, string | number>, formData: emailSignUpActionProps): Promise<Record<string, string | number>> {
+    const email = formData.email as string;
+    const password = formData.password as string;
+    const passwordConfirm = formData.confirm_password as string;
+    const name = formData.name as string;
 
-   if (!email || !password || !name) {
-      return {"status": 400, "message": "Please fill out all fields"}
-   }
+    if (password !== passwordConfirm) {
+        return {"status": 400, "message": "Passwords do not match"}
+    }
 
-   const passwordValidation = (password: string): boolean => {
-      const specialChars = '@$!%*?&.';
-      const upper = /\p{Lu}/u
-      const lower = /\p{Ll}/u
-      const number = /\d/
+    if (!email || !password || !name) {
+        return {"status": 400, "message": "Please fill out all fields"}
+    }
 
-      if (password == "") return false
+    const passwordValidation = (password: string): boolean => {
+        const specialChars = '@$!%*?&.';
+        const upper = /\p{Lu}/u
+        const lower = /\p{Ll}/u
+        const number = /\d/
 
-      return !(upper.test(password) && lower.test(password) && specialChars.split('').some(char => password.includes(char)) && number.test(password) && password != "")
-   }
+        if (password == "") return false
 
-   if (passwordValidation(password)) return {"status": 400, "message": "Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."}
+        return !(upper.test(password) && lower.test(password) && specialChars.split('').some(char => password.includes(char)) && number.test(password) && password != "")
+    }
 
-   const res = await createUser(email as string, password as string, name as string);
+    if (passwordValidation(password)) return {"status": 400, "message": "Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."}
 
-   if (res.status === "error") {
-      return {"status": 400, "message": res.message}
-   }
+    const res = await createUser(email as string, password as string, name as string);
 
-   return {"status": 200, "message": res.message}
+    if (res.status === "error") {
+        return {"status": 400, "message": res.message}
+    }
+
+    const verificationToken = await generateVerificationToken(email);
+
+    await sendVerificationEmail(
+        verificationToken.email,
+        verificationToken.token,
+        name
+    );
+
+    return {"status": 200, "message": res.message}
 
 }
 
 export async function emailSignInAction(formData: FormData) {
-   const email = formData.get("email")
-   const password = formData.get("password")
+    const email = formData.get("email")
+    const password = formData.get("password")
 
-   if (!email || !password) {
-      throw new Error("Please fill out all fields")
-   }
+    if (!email || !password) {
+        throw new Error("Please fill out all fields")
+    }
 
-   try {
-      const res = await signIn("credentials", { redirect: true, email, password, callbackUrl: "/dev/test/loggedIn" })
-
-      console.log(res)
-   }
-   catch (error) {
-      console.log(error)
-   }
+    try {
+        await signIn("credentials", { redirect: false, email, password })
+    }
+    catch (error) {
+        console.log(error)
+    }
 }

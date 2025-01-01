@@ -1,4 +1,5 @@
 import { emailSignInAction, googleSignInAction } from '@/libs/actions/actions'
+import Link from 'next/link'
 import React from 'react'
 
 export default function SignInWithCredencial() {
@@ -15,7 +16,7 @@ export default function SignInWithCredencial() {
                <input className="w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="password" type="password" placeholder="Password" name='password'/>
                <button className="w-full p-[10px] mt-[20px] bg-[#323232] text-white rounded-full text-[16px] cursor-pointer transition ease duration-250 hover:bg-[#000000]" type="submit">Sign In</button>
          </form>
-         <p className="font-normal text-[12px] leading-[1.5] text-[#777777] mt-[20px] text-center">New user? <a className="text-[#323232]" href="/dev/test/auth/signup">Sign up</a></p>
+         <p className="font-normal text-[12px] leading-[1.5] text-[#777777] mt-[20px] text-center">New user? <Link className="text-[#323232]" href="/auth/signup">Sign up</Link></p>
       </div>
    )
 }
