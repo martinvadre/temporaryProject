@@ -5,9 +5,11 @@ import { createUser } from "../userHandler";
 import { generateVerificationToken } from "@/libs/utils/verification-token";
 import { sendVerificationEmail } from "@/libs/utils/mail";
 import { AuthError } from 'next-auth';
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function googleSignInAction() {
-   await signIn("google", { redirect: true, callbackUrl: "/" })
+   await signIn("google", { redirect: true, redirectTo: "/" })
 }
 
 interface emailSignUpActionProps {
@@ -76,7 +78,9 @@ export async function emailSignInAction(prevState: Record<string, string | numbe
     }
 
     try {
-        await signIn("credentials", { redirect: false, email, password, callbackUrl: "/" })
+        await signIn("credentials", { email, password, redirect: false })
+
+        revalidatePath("/")
 
         return {"status": 200, "message": "Success"}
     }

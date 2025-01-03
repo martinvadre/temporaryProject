@@ -10,33 +10,26 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/co
 import Link from "next/link";
 
 export default function Home(): JSX.Element {
-    const { data: session } = useSession()
+    const { data: session, status } = useSession()
     const [greeting, setGreeting] = useState<string>("");
-    // const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [username, setUsername] = useState<string | undefined>(undefined);
 
-    // const handleToggleSidebar = () => {
-    //     setSidebarOpen((prev) => !prev);
-    // };
-
-
-    //  useEffect(() => {
-   //     navHandler();
-   //  }, []);
+    const date = new Date();
+    const hour = date.getHours();
 
     useEffect(() => {
-       const date = new Date();
-       const hour = date.getHours();
+        if (session?.user?.name) setUsername(session?.user?.name?.split(" ")[0]);
 
-       if (hour < 12) {
-          setGreeting("Good Morning");
-       }
-       else if (hour < 18) {
-          setGreeting("Good Afternoon");
-       }
-       else {
-          setGreeting("Good Evening");
-       }
-    }, []);
+        if (hour < 12) {
+            setGreeting("Good Morning");
+        }
+        else if (hour < 18) {
+            setGreeting("Good Afternoon");
+        }
+        else {
+            setGreeting("Good Evening");
+        }
+    }, [session, hour]);
 
     return (
         <div className="content">
@@ -51,11 +44,15 @@ export default function Home(): JSX.Element {
                         </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
-                    <div className="welcome-box">
-                        <div className="head" id="userInfo">
-                            <h2>{greeting}, <span id="username">{session?.user?.name?.split(" ")[0]}</span></h2>
-                        </div>
-                    </div>
+                    {
+                        !username ? ""
+                            :
+                            <div className="welcome-box">
+                                <div className="head" id="userInfo">
+                                    <h2>{greeting}, <span id="username">{username}</span></h2>
+                                </div>
+                            </div>
+                    }
                 </div>
 
                 {/* Section */}
