@@ -7,7 +7,7 @@ export default async function middleware(req: NextRequest) {
    const { pathname } = req.nextUrl;
    if (!session && !pathname.includes("/auth")) return NextResponse.redirect(new URL('/auth/signin', req.url))
 
-   if (session && (pathname.includes("/auth"))) return NextResponse.redirect(new URL('/dev/test/loggedIn', req.url))
+   if (session && (pathname.includes("/auth"))) return NextResponse.redirect(new URL('/', req.url))
 
    return NextResponse.next()
 }

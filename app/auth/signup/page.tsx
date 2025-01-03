@@ -117,8 +117,8 @@ export default function SignUpPage(): JSX.Element {
     //    )
 
     return (
-        <div className="flex items-center justify-center min-h-screen">
-            <Card className={`border-[#cecece] ${response.status == 200 ? "flex flex-col items-center justify-center" : ''} bg-white border rounded-[8px] w-full max-w-[480px] p-[1.2rem]`}>
+        <div className="flex h-full w-full items-center justify-center">
+            <div className="flex flex-col w-full max-w-[480px] p-[1.2rem]">
                 <h2 className="font-medium text-[20px] mb-[20px] text-center">{ response.status !== 200 ? "Sign Up" : "Success"}</h2>
                 {
                     response.status == 200 && <h2 className='mt-[3px] ml-[1px] justify-center items-center text-[20px]'>{response.message}</h2>
@@ -131,7 +131,7 @@ export default function SignUpPage(): JSX.Element {
                                 <FormField control={form.control} name="name" render={({ field }) => (
                                     <FormItem>
                                         <FormControl>
-                                            <Input disabled={isPending} {...field} className="font-inter h-auto w-full p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="name" name='Name' type="text" placeholder="Name"/>
+                                            <Input disabled={isPending} {...field} className="shadow-none w-full h-auto p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="name" name='Name' type="text" placeholder="Name"/>
                                         </FormControl>
                                     </FormItem>
                                 )} />
@@ -139,7 +139,7 @@ export default function SignUpPage(): JSX.Element {
                                 <FormField control={form.control} name="email" render={({ field }) => (
                                     <FormItem>
                                         <FormControl>
-                                            <Input disabled={isPending} {...field} className="w-full h-auto p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="email" name='Email' type="email" placeholder="Email"/>
+                                            <Input disabled={isPending} {...field} className="shadow-none w-full h-auto p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="email" name='Email' type="email" placeholder="Email"/>
                                         </FormControl>
                                     </FormItem>
                                 )} />
@@ -147,7 +147,7 @@ export default function SignUpPage(): JSX.Element {
                                 <FormField control={form.control} name="password" render={({ field }) => (
                                     <FormItem>
                                         <FormControl>
-                                            <Input disabled={isPending} {...field} className="w-full h-auto p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="password" name='Password' type="password" placeholder="Password"/>
+                                            <Input disabled={isPending} {...field} className="shadow-none w-full h-auto p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="password" name='Password' type="password" placeholder="Password"/>
                                         </FormControl>
                                         <p className={`mb-[2px] lg:text-xs ${passwordError.password != "" ? !passwordError.isLong ? 'text-red-500' : 'text-success hidden' : 'text-gray-400'} ml-1`}>• 8 charactors</p>
                                         <p className={`mb-[2px] lg:text-xs ${passwordError.password != "" ? !passwordError.isLower || !passwordError.isUpper || !passwordError.isNumber || !passwordError.isSpecial ? 'text-red-500' : 'text-success hidden' : 'text-gray-400'} ml-1`}>• 1 lower, 1 upper, 1 number, 1 special character {"(# ? ! @)"}</p>
@@ -159,7 +159,7 @@ export default function SignUpPage(): JSX.Element {
                                         <FormField control={form.control} name="confirm_password" render={({ field }) => (
                                             <FormItem>
                                                 <FormControl>
-                                                    <Input disabled={isPending} {...field} className="w-full h-auto p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="confirm-password" name='Confirm Password' type="password" placeholder="Confirm Password"/>
+                                                    <Input disabled={isPending} {...field} className="shadow-none w-full h-auto p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="confirm-password" name='Confirm Password' type="password" placeholder="Confirm Password"/>
                                                 </FormControl>
                                                 <FormMessage/>
                                             </FormItem>
@@ -191,7 +191,7 @@ export default function SignUpPage(): JSX.Element {
                         </>
                     )
                 }
-            </Card>
+            </div>
         </div>
     )
 }

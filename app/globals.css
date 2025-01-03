@@ -20,11 +20,6 @@
 
 html {
     scroll-behavior: smooth;
-    --nav-load-time: 1s;
-    --overlay-load-time: 1s;
-    --sidebar-load-time: 1.2s;
-    --intro-load-time: 2.4s;
-    --card-load-time: 3.6s;
 }
 
 body {
@@ -45,7 +40,6 @@ body {
     left: 50%;
     transform: translateX(-50%);
     transition: ease .25s;
-    animation: nav-load var(--nav-load-time) ease;
 }
 .nav-wrap {
     display: flex;
@@ -88,7 +82,6 @@ body {
     justify-content: flex-start;
     z-index: 1001;
     /* background: rgba(0, 0, 0, 0.25); */
-    /* animation: overlay-load var(--overlay-load-time) ease; */
 }
 .overlay-wrap.active {
     display: flex;
@@ -100,7 +93,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    animation: sidebar-load var(--sidebar-load-time) ease;
 }
 .overlay .head {
     display: flex;
@@ -133,112 +125,6 @@ body {
 .overlay .body ul li a {
     font: 450 12px/1.5 'inter', sans-serif;
     color: #777777;
-}
-
-/* intro */
-.intro-box {
-    text-align: left;
-    max-width: 1200px;
-    vertical-align: middle;
-    padding-top: 1.2rem;
-    margin: auto;
-    padding: 8rem 1.2rem 0;
-    animation: intro-load var(--intro-load-time) ease;
-}
-.intro-box .head {
-    font: 600 24px 'inter', sans-serif;
-    color: #323232;
-    margin: 1rem 0;
-}
-
-/* card */
-.card-container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 2rem 1.2rem 0;
-    display: grid;
-    text-align: center;
-    gap: 1.2rem;
-    animation: card-load var(--card-load-time) ease;
-}
-.sche-card {
-    grid-row: 1/ span 1;
-}
-.todo-card {
-    grid-row: 1/ span 1;
-}
-.note-card {
-    grid-column: 1/ span 2;
-}
-.card-wrap .head {
-    font: 450 12px/1.5 'inter', sans-serif;
-    color: #777777;
-    text-align: left;
-    padding: .25rem .5rem;
-    transition: ease .25s;
-}
-.card-wrap .body {
-    border: .5px solid #cecece;
-    border-radius: 8px;
-    padding: 1rem 2rem 10rem;
-}
-
-/* footer */
-.design {
-    text-align: center;
-    margin: auto;
-    bottom: 0;
-    padding: 5.2rem 0 1rem;
-    position: static;
-    animation: design-load var(--design-load-time) ease;
-}
-.design p {
-    font: 350 14px/1.5 'roboto', sans-serif;
-    color: #777777;
-    transition: ease .25s;
-}
-footer {
-    border-top: .5px solid #cecece;
-    background: rgba(255, 255, 255, .85);
-    backdrop-filter: blur(24px);
-    text-align: left;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    z-index: 1000;
-    animation: zero-load var(--zero-load-time) ease;
-    transition: ease .25s;
-}
-.fixed-footer {
-    max-width: 1200px;
-    padding: .125rem 1.2rem;
-    padding-bottom: calc(.125rem + 0px);
-    margin: auto;
-}
-.fixed-footer a,
-.fixed-footer p {
-    font: 350 14px 'inter', sans-serif;
-    color: #323232;
-    transition: ease .25s;
-}
-.fixed-footer a:hover {
-    color: #0179ff;
-    transition: ease .25s;
-}
-.fixed-footer .current {
-    color: #777777;
-    transition: ease .25s;
-}
-.fixed-footer .current:hover {
-    color: #777777;
-    transition: ease .25s;
-}
-.lower {
-    font-size: 12px;
-}
-.early {
-    color: transparent;
 }
 
 /* ------------------------------------------------ */
@@ -304,60 +190,6 @@ footer {
 
 /* ------------------------------------------------ */
 
-@keyframes nav-load {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -100%);
-    }
-    100% {
-        opacity: 1;
-        transform: translate(-50%, 0);
-    }
-}
-@keyframes overlay-load {
-    0% {
-        opacity: 0;
-    }
-    12% {
-        opacity: 1;
-    }
-}
-@keyframes sidebar-load {
-    0% {
-        /* opacity: 0; */
-        transform: translateX(-100%);
-    }
-    12% {
-        /* opacity: 1; */
-        transform: translateX(0);
-    }
-}
-@keyframes intro-load {
-    0% {
-        opacity: 0;
-        transform: translateY(40%);
-    }
-    25% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-@keyframes card-load {
-    0% {
-        opacity: 0;
-        transform: translateY(40%);
-    }
-    25% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 @layer base {
   :root {
         --background: 0 0% 100%;
