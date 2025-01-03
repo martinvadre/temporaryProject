@@ -9,6 +9,8 @@ import { useSession } from "next-auth/react";
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb";
 import Link from "next/link";
+import CLink from "@/components/customUI/link";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Home(): JSX.Element {
     const { data: session, status } = useSession()
@@ -19,7 +21,11 @@ export default function Home(): JSX.Element {
     const hour = date.getHours();
 
     useEffect(() => {
-        if (session?.user?.name) setUsername(session?.user?.name?.split(" ")[0]);
+        if (session?.user?.name) {
+            setTimeout(() => {
+                setUsername(session?.user?.name?.split(" ")[0])
+            }, 1000);
+        };
 
         if (hour < 12) {
             setGreeting("Good Morning");
@@ -34,19 +40,19 @@ export default function Home(): JSX.Element {
 
     return (
         <div>
-            <div className="max-w-[1200px] text-left align-middle m-auto pt-[8rem]">
+            <div className="max-w-[1200px] text-left align-middle m-auto pt-[5rem]">
                 <Breadcrumb className="breadcrum">
                     <BreadcrumbList>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href="/">Home</Link>
+                            <CLink isDisabled = {true} href="/">Home</CLink>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
                 <div>
                     <div className="font-inter font-[600] text-[24px] text-[#323232] my-[1rem]" id="userInfo">
-                        {username != undefined && <h2>{greeting}, <span id="username">{username}</span></h2>}
+                        {username != undefined ? <h2>{greeting}, <span id="username">{username}</span></h2> : <Skeleton className="w-[280px] h-[25px] rounded-sm"/>}
                     </div>
                 </div>
             </div>

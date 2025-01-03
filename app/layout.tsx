@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from "sonner"
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -32,8 +32,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <html lang="en">
             <body className={`${inter.className}`}>
                 <SessionProvider>
-                    <Toaster position="top-center"/>
                     {children}
+                    <Toaster richColors={false} position="top-center"/>
                 </SessionProvider>
             </body>
         </html>

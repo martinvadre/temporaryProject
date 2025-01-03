@@ -12,13 +12,13 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { Input } from '@/components/ui/input'
 import CButton from '@/components/customUI/button';
 import { Button } from '../ui/button';
-import toast from 'react-hot-toast';
 import { FaGoogle } from "react-icons/fa"
+import { toast } from "sonner"
 
 
 export default function SignInWithCredencial() {
     const [response, formAction, isPending] = useActionState(emailSignInAction, {"status": 0, "message": ""})
-    const [toastId, setToastId] = useState<string>("GAY")
+    const toastId = "GAY"
 
     const form = useFormAction<z.infer<typeof signInSchema>>({
         resolver: zodResolver(signInSchema),
@@ -43,7 +43,7 @@ export default function SignInWithCredencial() {
 
         if (response.status != 200) {
             toast.error(response?.message as string, {
-                id: toastId
+                id: toastId,
             });
          }
 
@@ -51,7 +51,7 @@ export default function SignInWithCredencial() {
             form.reset()
 
             toast.success(response?.message as string, {
-                id: toastId
+                id: toastId,
              });
 
             const timeoutId = setTimeout(() => {
@@ -70,7 +70,7 @@ export default function SignInWithCredencial() {
                     <Button disabled={isPending || response.status == 200} className="shadow-none w-full h-auto bg-inherit hover:bg-inherit py-2 border border-[#cecece] text-lg text-[#777777] rounded-full cursor-pointer transition ease duration-250 hover:border-[#323232] hover:text-[#323232]" type="submit"><FaGoogle/>Contiue with Google</Button>
                 </form>
                 <div className="font-normal text-[12px] leading-[1.5] text-[#777777] my-[7px] text-center">or</div>
-    
+
                 <Form {...form}>
                     <form {...form.submitAction(onSubmit)}>
                         <FormField control={form.control} name="email" render={({ field }) => (
@@ -80,7 +80,7 @@ export default function SignInWithCredencial() {
                                 </FormControl>
                             </FormItem>
                         )} />
-    
+
                         <FormField control={form.control} name="password" render={({ field }) => (
                             <FormItem>
                                 <FormControl>

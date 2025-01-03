@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input'
 import { useFormAction } from '@/libs/hooks/useFormAction'
 import CButton from '@/components/customUI/button'
 import Link from 'next/link'
-import toast from 'react-hot-toast'
+import { toast } from 'sonner'
 
 interface PasswordErrorState {
     isUpper: boolean
