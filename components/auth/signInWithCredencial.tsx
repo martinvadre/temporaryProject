@@ -63,42 +63,42 @@ export default function SignInWithCredencial() {
     }, [isPending, response, toastId])
 
     return (
-        <Card className="bg-white rounded-[8px] border-[#cecece] shadow-none border w-full max-w-[480px] p-[1.2rem] justify-center items-center">
-            <h2 className="font-medium text-[20px] mb-[20px] text-center">Sign In</h2>
-            <form action={googleSignInAction}>
-                <Button disabled={isPending || response.status == 200} className="w-full h-auto bg-inherit hover:bg-inherit py-2 border border-[#cecece] text-lg text-[#777777] rounded-full cursor-pointer transition ease duration-250 hover:border-[#323232] hover:text-[#323232]" type="submit"><FaGoogle/>Contiue with Google</Button>
-            </form>
-            <div className="font-normal text-[12px] leading-[1.5] text-[#777777] my-[7px] text-center">or</div>
-
-            <Form {...form}>
-                <form {...form.submitAction(onSubmit)}>
-                    <FormField control={form.control} name="email" render={({ field }) => (
-                        <FormItem>
-                            <FormControl>
-                                <Input disabled={isPending || response.status == 200} {...field} className="w-full h-auto p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="email" name='Email' type="email" placeholder="Email"/>
-                            </FormControl>
-                        </FormItem>
-                    )} />
-
-                    <FormField control={form.control} name="password" render={({ field }) => (
-                        <FormItem>
-                            <FormControl>
-                                <Input disabled={isPending || response.status == 200} {...field} className="w-full h-auto p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="password" type="password" placeholder="Password" name='password'/>
-                            </FormControl>
-                        </FormItem>
-                    )} />
-                    {
-                        response.status != 200 && <FormMessage className="mt-[3px] ml-[1px]">{response.message}</FormMessage>
-                    }
-                    {
-                        form.formState.errors.password && <FormMessage className="mt-[3px] ml-[1px]">{form.formState.errors.password.message}</FormMessage>
-                    }
-                    <CButton isLoading={isPending || response.status == 200} isDisabled={!(form.getValues().password != "" && form.getValues().email != "")} className="w-full h-auto p-[10px] mt-[20px] bg-[#323232] text-white rounded-full text-[16px] cursor-pointer transition ease duration-250 hover:bg-[#000000]" type="submit">Sign In</CButton>
+        <div className="flex h-full w-full items-center justify-center">
+            <div className="flex flex-col w-full max-w-[480px] p-[1.2rem]">
+                <h2 className="font-medium text-[20px] mb-[20px] text-center">Sign In</h2>
+                <form action={googleSignInAction}>
+                    <Button disabled={isPending || response.status == 200} className="shadow-none w-full h-auto bg-inherit hover:bg-inherit py-2 border border-[#cecece] text-lg text-[#777777] rounded-full cursor-pointer transition ease duration-250 hover:border-[#323232] hover:text-[#323232]" type="submit"><FaGoogle/>Contiue with Google</Button>
                 </form>
-            </Form>
-
-
-            <p className="font-normal text-[12px] leading-[1.5] text-[#777777] mt-[20px] text-center">New user? <Link className="text-[#323232]" href="/auth/signup">Sign up</Link></p>
-        </Card>
+                <div className="font-normal text-[12px] leading-[1.5] text-[#777777] my-[7px] text-center">or</div>
+    
+                <Form {...form}>
+                    <form {...form.submitAction(onSubmit)}>
+                        <FormField control={form.control} name="email" render={({ field }) => (
+                            <FormItem>
+                                <FormControl>
+                                    <Input disabled={isPending || response.status == 200} {...field} className="shadow-none w-full h-auto p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="email" name='Email' type="email" placeholder="Email"/>
+                                </FormControl>
+                            </FormItem>
+                        )} />
+    
+                        <FormField control={form.control} name="password" render={({ field }) => (
+                            <FormItem>
+                                <FormControl>
+                                    <Input disabled={isPending || response.status == 200} {...field} className="shadow-none w-full h-auto p-[10px] mt-[5px] border border-[#cecece] rounded-[8px] text-[14px]" id="password" type="password" placeholder="Password" name='password'/>
+                                </FormControl>
+                            </FormItem>
+                        )} />
+                        {
+                            response.status != 200 && <FormMessage className="mt-[3px] ml-[1px]">{response.message}</FormMessage>
+                        }
+                        {
+                            form.formState.errors.password && <FormMessage className="mt-[3px] ml-[1px]">{form.formState.errors.password.message}</FormMessage>
+                        }
+                        <CButton isLoading={isPending || response.status == 200} isDisabled={!(form.getValues().password != "" && form.getValues().email != "")} className="shadow-none w-full h-auto p-[10px] mt-[20px] bg-[#323232] text-white rounded-full text-[16px] cursor-pointer transition ease duration-250 hover:bg-[#000000]" type="submit">Sign In</CButton>
+                    </form>
+                </Form>
+                <p className="font-normal text-[12px] leading-[1.5] text-[#777777] mt-[20px] text-center">New user? <Link className="text-[#323232]" href="/auth/signup">Sign up</Link></p>
+            </div>
+        </div>
     )
 }

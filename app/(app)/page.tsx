@@ -1,5 +1,6 @@
 "use client";
 
+import { Roboto, Inter, Arimo } from "next/font/google";
 import { JSX ,useEffect, useState } from "react";
 import { navHandler } from "@/libs/utils/navbarHandler";
 import Navbar from "@/components/navbar/navbar";
@@ -32,51 +33,38 @@ export default function Home(): JSX.Element {
     }, [session, hour]);
 
     return (
-        <div className="content">
-            <div>
-                <div className="intro-box">
-                    <Breadcrumb className="breadcrum">
-                        <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href="/">Home</Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        </BreadcrumbList>
-                    </Breadcrumb>
-                    {
-                        !username ? ""
-                            :
-                            <div className="welcome-box">
-                                <div className="head" id="userInfo">
-                                    <h2>{greeting}, <span id="username">{username}</span></h2>
-                                </div>
-                            </div>
-                    }
+        <div>
+            <div className="max-w-[1200px] text-left align-middle m-auto pt-[8rem]">
+                <Breadcrumb className="breadcrum">
+                    <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href="/">Home</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    </BreadcrumbList>
+                </Breadcrumb>
+                <div>
+                    <div className="font-inter font-[600] text-[24px] text-[#323232] my-[1rem]" id="userInfo">
+                        {username != undefined && <h2>{greeting}, <span id="username">{username}</span></h2>}
+                    </div>
                 </div>
-
-                {/* Section */}
-                <section className="h-full card-container">
-                    <div className="card-wrap sche-card">
-                        <h1 className="head">Sche</h1>
-                        <div className="body"></div>
-                    </div>
-                    <div className="card-wrap todo-card">
-                        <h1 className="head">Todo</h1>
-                        <div className="body"></div>
-                    </div>
-                    <div className="card-wrap note-card">
-                        <h1 className="head">Note</h1>
-                        <div className="body"></div>
-                    </div>
-                </section>
             </div>
-
-            {/* <footer>
-                <div className="fixed-footer">
-                    <p className="current">Home <span className="lower early">{">"}</span></p>
+            {/* Section */}
+            <section className="max-w-[1200px] align-center grid gap-[1.2rem] m-auto pt-[2rem]">
+                <div className="card-wrap row-start-1 row-span-1">
+                    <h1 className="font-inter font-[450] text-[12px] text-[#777777] text-left py-[.25rem] px-[.5rem]">Sche</h1>
+                    <div className="border-[.5px] border-solid border-[#cecece] rounded-[8px] pt-[1rem] pb-[10rem] px-[2rem]"></div>
                 </div>
-            </footer> */}
+                <div className="card-wrap row-start-1 row-span-1">
+                    <h1 className="font-inter font-[450] text-[12px] text-[#777777] text-left py-[.25rem] px-[.5rem]">Todo</h1>
+                    <div className="border-[.5px] border-solid border-[#cecece] rounded-[8px] pt-[1rem] pb-[10rem] px-[2rem]"></div>
+                </div>
+                <div className="card-wrap col-start-1 col-span-2">
+                    <h1 className="font-inter font-[450] text-[12px] text-[#777777] text-left py-[.25rem] px-[.5rem]">Note</h1>
+                    <div className="border-[.5px] border-solid border-[#cecece] rounded-[8px] pt-[1rem] pb-[10rem] px-[2rem]"></div>
+                </div>
+            </section>
         </div>
     );
 }
