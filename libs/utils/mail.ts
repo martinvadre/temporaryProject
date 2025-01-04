@@ -1,5 +1,4 @@
 import { Resend } from "resend";
-import React from "react";
 import EmailVerificationEmail from "@/components/auth/verifyEmailSend";
 
 const resend = new Resend(process.env.AUTH_RESEND_KEY);

@@ -1,10 +1,6 @@
 import React from "react";
 import Burger from "./burger";
-import { SidebarProvider, SidebarTrigger } from "../ui/sidebar";
-
-interface NavbarProps {
-    children: React.ReactNode;
-}
+import { SidebarTrigger } from "../ui/sidebar";
 
 const Navbar: React.FC = () => {
     return (

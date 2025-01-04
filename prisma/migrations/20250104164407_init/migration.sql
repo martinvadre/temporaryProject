@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `ToDo` ADD COLUMN `doneAt` DATETIME(3) NULL;

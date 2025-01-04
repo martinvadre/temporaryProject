@@ -4,11 +4,6 @@ import { User } from "next-auth";
 import prisma from "./prismadb";
 import bcrypt from "bcryptjs";
 
-interface CustomUser extends User {
-   role?: string
-   password?: string
-}
-
 export async function createUser(email: string, password: string, name?: string): Promise<Record<string, string | number>> {
 
    const checkUser = await prisma.user.findUnique({

@@ -8,7 +8,7 @@ import CLink from "@/components/customUI/link";
 export default function CalendarPG(): JSX.Element {
 
     return (
-        <div className="max-w-[1200px] mt-20 m-auto">
+        <div className="max-w-[1200px]">
             <Breadcrumb className="mb-4">
                 <BreadcrumbList>
                     <BreadcrumbItem>

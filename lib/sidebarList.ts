@@ -1,15 +1,9 @@
-import { LucideIcon } from "lucide-react";
-
 import { HouseIcon } from "lucide-react"
 import { CalendarDaysIcon } from "lucide-react"
 import { ListCheckIcon } from "lucide-react"
 import { SettingsIcon } from "lucide-react"
 
-export interface SidebarList {
-    name: string;
-    path: string;
-    icon: LucideIcon
-}
+import { SidebarList } from "@/libs/interfaces";
 
 export const home: SidebarList[] = [
     { name: "Home", path: "/", icon: HouseIcon },

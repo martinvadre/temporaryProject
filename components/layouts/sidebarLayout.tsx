@@ -1,5 +1,5 @@
 import { SidebarProvider } from "@/components/ui/sidebar"
-import AppSidebar from "@/components/app-sidebar"
+import AppSidebar from "@/components/sidebar/sidebar"
 import Navbar from "../navbar/navbar"
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
