@@ -2,7 +2,7 @@
 
 import { Roboto, Inter, Arimo } from "next/font/google";
 import { JSX ,useEffect, useState } from "react";
-import { navHandler } from "@/libs/utils/navbarHandler";
+// import { navHandler } from "@/libs/utils/navbarHandler";
 import Navbar from "@/components/navbar/navbar";
 import Sidebar from "@/components/sidebar/sidebar";
 import { useSession } from "next-auth/react";

@@ -8,8 +8,8 @@ import CLink from "@/components/customUI/link";
 export default function TodoPG(): JSX.Element {
 
     return (
-        <div className="max-w-[1200px] mt-20 m-auto">
-            <Breadcrumb className="mb-4">
+        <div className="max-w-[1200px] mt-[5rem] mx-auto mb-[1rem]">
+            <Breadcrumb className="mb-[1rem]">
                 <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
