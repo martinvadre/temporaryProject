@@ -54,7 +54,7 @@ export default function CalendarPG(): JSX.Element {
                 </BreadcrumbList>
             </Breadcrumb>
 
-            <div className="mb-4 flex justify-end">
+            <div className="py-[1rem] flex justify-start">
                 <AddEventModal/>
             </div>
 
@@ -63,34 +63,42 @@ export default function CalendarPG(): JSX.Element {
                 events={events}
                 startAccessor="start"
                 endAccessor="end"
-                style={{ height: "600px", backgroundColor: "white", }}
+                style={{ height: "600px", backgroundColor: "white" }}
+                dayPropGetter={(date) => {
+                    const isOutOfMonth = date.getMonth() !== new Date().getMonth();
+                    return {
+                        className: `${isOutOfMonth ? "bg-transparent text-gray-400" : "bg-white text-black"}`,
+                    };
+                }}            
                 components={{
-                    toolbar: ({onNavigate, label}) => (
-                        <div className="border-[.5px] border-solid border-b-0 border-[#cecece] flex justify-between items-center bg-white p-[.5rem] rounded-t-[8px]">
-                            <Button onClick={() => onNavigate("PREV")} className="px-[1rem] py-[.25rem] rounded-[6px]">
-                                    Prev
-                            </Button>
+                    toolbar: ({ onNavigate, label }) => (
+                        <div className="flex justify-between items-center pb-[1rem]">
+                            <button onClick={() => onNavigate("PREV")} className="text-[14px] border border-[#cecece] bg-[#ffffff] text-[#555555] rounded-[8px] px-[1rem] py-[.25rem] hover:bg-[#f8f8f8]">
+                                Prev
+                            </button>
                             <h2 className="font-[500] text-[16px] text-[#000000]">{label}</h2>
-                            <Button onClick={() => onNavigate("NEXT")} className="px-[1rem] py-[.25rem] rounded-[6px]">
+                            <button onClick={() => onNavigate("NEXT")} className="text-[14px] border border-[#cecece] bg-[#ffffff] text-[#555555] rounded-[8px] px-[1rem] py-[.25rem] hover:bg-[#f8f8f8]">
                                 Next
-                            </Button>
+                            </button>
                         </div>
                     ),
-
+            
                     month: {
-                        dateHeader: (props) => {
+                        dateHeader: ({ label, date }) => {
+                            const isToday = new Date().toDateString() === date.toDateString();
+            
                             return (
-                                <div className="text-gray-700 rounded-[8px] p-[.25rem]">
-                                    <span>{props.label}</span>
+                                <div className={`text-right font-medium ${isToday ? "text-blue-500" : "text-black"}`}>
+                                    {label}
                                 </div>
                             );
                         },
                     },
-
+            
                     agenda: {
-                        event: (event) => (
+                        event: ({ title }) => (
                             <div className="text-blue-600">
-                                <span>{event.title}</span>
+                                <span>{title}</span>
                             </div>
                         ),
                     },

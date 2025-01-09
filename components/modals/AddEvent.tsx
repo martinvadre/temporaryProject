@@ -2,6 +2,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import CButton from "../customUI/button"
+import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { CalendarEvent, EventAdd } from "@/libs/interfaces";
 import { delay } from "@/libs/utils/utils";
 import { useSession } from "next-auth/react";
@@ -81,46 +82,59 @@ export default function AddEventModal() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <CButton className="bg-[#000000] text-white rounded-[8px] px-[1rem] py-[.25rem] mr-[0.5rem] mb-[0.5rem] hover:bg-[#323232]">Add Event</CButton>
+                <CButton className="bg-[#000000] text-[#ffffff] rounded-[8px] px-[1rem] py-[.25rem] hover:bg-[#323232]">Add Event</CButton>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="max-w-[420px]">
                 <DialogHeader>
-                    <DialogTitle>Event Creation</DialogTitle>
-                    <DialogDescription>
-                        {`Create a new event by filling out the form below`}
-                    </DialogDescription>
+                    <DialogTitle className="text-center">Add Event</DialogTitle>
                 </DialogHeader>
-                <div className="grid gap-4 py-4">
-                    <Label htmlFor="title">Event Title</Label>
+                <div className="grid py-[1rem]">
                     <Input
                         disabled={loading}
                         type="text"
                         id="title"
+                        placeholder="Title"
                         value={newEvent.title}
                         onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
-                        className="w-full"
+                        className="border border-[#cecece] rounded-[8px] w-full px-[.5rem] shadow-none mb-[1rem] text-[14px]"
                     />
-                    <Label htmlFor="start">Start Time</Label>
-                    <Input
-                        disabled={loading}
-                        type="datetime-local"
-                        id="start"
-                        value={newEvent.start as string}
-                        onChange={(e) => setNewEvent({ ...newEvent, start: e.target.value })}
-                        className="w-full"
-                    />
-                    <Label htmlFor="end">End Time</Label>
-                    <Input
-                        disabled={loading}
-                        type="datetime-local"
-                        id="end"
-                        value={newEvent.end as string}
-                        onChange={(e) => setNewEvent({ ...newEvent, end: e.target.value })}
-                        className="w-full"
-                    />
+                    <div className="border border-[#cecece] rounded-[8px]">
+                        <div className="flex">
+                            <div className="m-auto w-full px-[.5rem]">
+                                <Label className="text-center text-[#777777] font-normal" htmlFor="start">Starts</Label>
+                            </div>
+                            <div className="m-auto">
+                                <Input
+                                    disabled={loading}
+                                    type="datetime-local"
+                                    id="start"
+                                    value={newEvent.start as string}
+                                    onChange={(e) => setNewEvent({ ...newEvent, start: e.target.value })}
+                                    className="w-fit border-none shadow-none px-[.5rem] text-[14px]"
+                                />
+                            </div>
+                        </div>
+                        <div className="mx-[.5rem] border-b border-[#cecece]"></div>
+                        <div className="flex">
+                            <div className="m-auto w-full px-[.5rem]">
+                                <Label className="text-center text-[#777777] font-normal" htmlFor="end">Ends</Label>
+                            </div>
+                            <div className="m-auto">
+                                <Input
+                                    disabled={loading}
+                                    type="datetime-local"
+                                    id="end"
+                                    value={newEvent.end as string}
+                                    onChange={(e) => setNewEvent({ ...newEvent, end: e.target.value })}
+                                    className="w-fit border-none shadow-none px-[.5rem] text-[14px]"
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <DialogFooter>
-                    <CButton isLoading={loading} onClick={handleAddEvent} >Save</CButton>
+                    <DialogPrimitive.Close className="text-[14px] border border-[#cecece] bg-[#ffffff] text-[#555555] rounded-[8px] px-[1rem] py-[.25rem] hover:bg-[#f8f8f8]">Cancel</DialogPrimitive.Close>
+                    <CButton className="text-[14px] bg-[#000000] text-[#ffffff] rounded-[8px] px-[1rem] py-[.25rem] hover:bg-[#323232]" isLoading={loading} onClick={handleAddEvent}>&nbsp;&nbsp;Save&nbsp;&nbsp;</CButton>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

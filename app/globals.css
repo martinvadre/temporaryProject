@@ -36,7 +36,7 @@ body {
     position: fixed;
     background: #ffffff;
     border-bottom: .5px solid #cecece;
-    z-index: 1000;
+    z-index: 40;
     left: 50%;
     transform: translateX(-50%);
     transition: ease .25s;
