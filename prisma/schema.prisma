@@ -23,6 +23,8 @@ model User {
     sessions      Session[]
     toDos         ToDo[]
 
+
+    Event Event[]
 }
 
 model Account {
@@ -89,6 +91,20 @@ model ToDo {
     createdAt  DateTime @default(now())
     updatedAt  DateTime @updatedAt
     doneAt     DateTime?
+    userId     String
+    calendarId String
+
+    user      User     @relation(fields: [userId], references: [id])
+
+    @@index([userId])
+}
+
+model Event {
+    id         String   @id @default(cuid())
+    title      String
+    start      DateTime
+    end        DateTime
+    allDay     Boolean
     userId     String
     calendarId String
 

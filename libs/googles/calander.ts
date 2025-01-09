@@ -1,8 +1,9 @@
 "use server";
 
-import { google } from 'googleapis';
+import { google, calendar_v3 } from 'googleapis';
 import prisma from '@/libs/prismadb';
 import { auth } from '../auth';
+import { EventAdd } from '../interfaces';
 
 const calendar = google.calendar("v3");
 
@@ -47,8 +48,6 @@ export const getCalander = async () => {
         throw new Error("User not logged in");
     }
 
-    console.log(session.user);
-
     const userId = session.user?.id;
 
     const OAuth = await getOAuthClient(userId as string);
@@ -62,12 +61,14 @@ export const getCalander = async () => {
         orderBy: "startTime",
     });
 
-    console.log(res.data.items);
+    if (!res) {
+        throw new Error("Events not found");
+    }
 
     return res.data.items;
 }
 
-export const createEvent = async (event?: any | undefined) => {
+export const createEvent = async (event: EventAdd) => {
     const session = await auth();
 
     if (!session) {
@@ -78,36 +79,30 @@ export const createEvent = async (event?: any | undefined) => {
 
     const OAuth = await getOAuthClient(userId as string);
 
-    const evt = {
-        attendees: [
-            {
-                email: "sukruangkul.aongsa@gmail.com",
-                displayName: "Guess User",
-            },
-            {
-                email: "oangsaytv@gmail.com",
-                displayName: "Test User",
-                responseStatus: "accepted"
-            }
-        ],
-        description: "This is a test event",
-        start: {
-            dateTime: new Date().toISOString(),
-        },
-        end: {
-            dateTime: new Date(new Date().setDate(new Date().getDate() + 1)).toISOString(),
-        },
-        summary: "Test Event",
-    }
+    const addEvent = event.event;
 
     const res = await calendar.events.insert({
         calendarId: "primary",
         auth: OAuth,
         sendUpdates: "all",
-        requestBody: evt
-    })
+        requestBody: addEvent as calendar_v3.Schema$Event,
+    });
 
-    console.log(res.data);
+
+    if (!res) {
+        throw new Error("Event not created");
+    }
+
+    await prisma.event.create({
+        data: {
+            title: res.data.summary as string,
+            start: res.data.start?.dateTime as string,
+            end: res.data.end?.dateTime as string,
+            allDay: res.data.start?.date ? true : false,
+            userId: userId as string,
+            calendarId: res.data.id as string,
+        }
+    });
 
     return res.data;
 }

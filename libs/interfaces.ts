@@ -1,6 +1,14 @@
 import { User } from "next-auth";
 import { LucideIcon } from "lucide-react";
 
+
+interface EventAttendee {
+    email: string
+    displayName: string
+    responseStatus?: string
+}
+
+type EventKind = "Event" | "Schedule"
 export interface Users extends User {
     role?: string
     password?: string
@@ -13,11 +21,6 @@ export interface SidebarList {
     icon: LucideIcon
 }
 
-interface EventAttendee {
-    email: string
-    displayName: string
-    responseStatus?: string
-}
 
 export interface EventInterface {
     attendees: [
@@ -31,5 +34,17 @@ export interface EventInterface {
     end: {
         dateTime: string
     }
-    summary: string
+    summary?: string
+}
+
+export type EventAdd = {
+    kind: EventKind,
+    event: EventInterface
+}
+
+export type CalendarEvent = {
+    title: string
+    start: string | Date
+    end: string | Date
+    allDay?: boolean
 }

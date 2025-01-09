@@ -8,7 +8,6 @@ export default function TestPg(): JSX.Element {
 
     async function getCalanderTest() {
         const data = await getCalander()
-        console.log(data)
     }
 
     async function addEvtTest() {

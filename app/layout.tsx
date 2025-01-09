@@ -5,16 +5,6 @@ import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "sonner"
 
-const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
-});
-
 const inter = Inter({
     variable: "--font-inter",
     subsets: ["latin"],
@@ -33,7 +23,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <body className={`${inter.className}`}>
                 <SessionProvider>
                     {children}
-                    <Toaster richColors={false} position="top-center"/>
+                    <Toaster className={`${inter.className}`} richColors={false} position="top-center"/>
                 </SessionProvider>
             </body>
         </html>
