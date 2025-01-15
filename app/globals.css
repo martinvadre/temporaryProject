@@ -31,23 +31,6 @@ body {
 }
 
 /* nav */
-.navbar {
-    width: 100vw;
-    position: fixed;
-    background: #ffffff;
-    border-bottom: .5px solid #cecece;
-    z-index: 40;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: ease .25s;
-}
-.nav-wrap {
-    display: flex;
-    margin: auto;
-    padding: .25rem .5rem .5rem;
-    align-items: center;
-    justify-content: space-between;
-}
 .burger-box {
     border-radius: 8px;
     transition: ease .25s;

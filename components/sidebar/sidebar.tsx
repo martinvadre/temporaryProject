@@ -1,12 +1,15 @@
+"use client"
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, useSidebar } from "@/components/ui/sidebar"
 import { sidebarList, home } from "@/lib/sidebarList"
 import Link from "next/link"
 
 export default function AppSidebar() {
+    const {toggleSidebar} = useSidebar()
+
     return (
-        <section className="flex flex-col h-screen">
+        // <section className="flex flex-col h-screen">
             <Sidebar variant="sidebar">
-                <div className="lg:mt-[4rem] md:mt-[4rem]">
+                <div>
                     <SidebarContent>
                         <SidebarGroup>
                             <SidebarHeader>
@@ -14,7 +17,7 @@ export default function AppSidebar() {
                                     home.map(({name, path, icon: Icon}, index: number) => (
                                         <SidebarMenuItem key={index}>
                                             <SidebarMenuButton asChild>
-                                                <Link replace prefetch={true} href={path}>
+                                                <Link onClick={() => toggleSidebar()} replace prefetch={true} href={path}>
                                                     <span>
                                                         <Icon size={18} />
                                                     </span>
@@ -32,7 +35,7 @@ export default function AppSidebar() {
                                         sidebarList.map(({name, path, icon: Icon}, index: number) => (
                                             <SidebarMenuItem key={index}>
                                                 <SidebarMenuButton asChild>
-                                                    <Link replace prefetch={true} href={path}>
+                                                    <Link onClick={() => toggleSidebar()} replace prefetch={true} href={path}>
                                                         <span>
                                                             <Icon size={18} />
                                                         </span>
@@ -48,6 +51,6 @@ export default function AppSidebar() {
                     </SidebarContent>
                 </div>
             </Sidebar>
-        </section>
+        // </section>
     )
 }

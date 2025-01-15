@@ -58,7 +58,7 @@ const SidebarProvider = React.forwardRef<
 >(
   (
     {
-      defaultOpen = true,
+      defaultOpen = false,
       open: openProp,
       onOpenChange: setOpenProp,
       className,
@@ -69,12 +69,25 @@ const SidebarProvider = React.forwardRef<
     ref
   ) => {
     const isMobile = useIsMobile()
+    
+    // Set the initial mobile sidebar state to closed.
     const [openMobile, setOpenMobile] = React.useState(false)
 
-    // This is the internal state of the sidebar.
-    // We use openProp and setOpenProp for control from outside the component.
-    const [_open, _setOpen] = React.useState(defaultOpen)
+    // Retrieve sidebar state from cookies, if available.
+    const getCookie = (name: string) => {
+      const value = `; ${document.cookie}`
+      const parts = value.split(`; ${name}=`)
+      if (parts.length === 2) return parts.pop()?.split(";").shift()
+      return null
+    }
+
+    const storedSidebarState = getCookie(SIDEBAR_COOKIE_NAME)
+    const initialState = storedSidebarState === 'true'
+
+    // Desktop state management with defaultOpen or stored cookie value
+    const [_open, _setOpen] = React.useState(initialState || defaultOpen)
     const open = openProp ?? _open
+
     const setOpen = React.useCallback(
       (value: boolean | ((value: boolean) => boolean)) => {
         const openState = typeof value === "function" ? value(open) : value
@@ -84,20 +97,20 @@ const SidebarProvider = React.forwardRef<
           _setOpen(openState)
         }
 
-        // This sets the cookie to keep the sidebar state.
+        // Set the cookie to persist the sidebar state.
         document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`
       },
       [setOpenProp, open]
     )
 
-    // Helper to toggle the sidebar.
+    // Mobile sidebar toggle
     const toggleSidebar = React.useCallback(() => {
       return isMobile
         ? setOpenMobile((open) => !open)
         : setOpen((open) => !open)
     }, [isMobile, setOpen, setOpenMobile])
 
-    // Adds a keyboard shortcut to toggle the sidebar.
+    // Keyboard shortcut to toggle the sidebar
     React.useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
         if (
@@ -113,10 +126,10 @@ const SidebarProvider = React.forwardRef<
       return () => window.removeEventListener("keydown", handleKeyDown)
     }, [toggleSidebar])
 
-    // We add a state so that we can do data-state="expanded" or "collapsed".
-    // This makes it easier to style the sidebar with Tailwind classes.
+    // Determine the sidebar state for styling (expanded/collapsed)
     const state = open ? "expanded" : "collapsed"
 
+    // Context to share the sidebar state across components
     const contextValue = React.useMemo<SidebarContext>(
       () => ({
         state,
@@ -200,7 +213,7 @@ const Sidebar = React.forwardRef<
             data-sidebar="sidebar"
             aria-describedby={undefined}
             data-mobile="true"
-            className="w-[--sidebar-width] bg-sidebar pt-16 px-0 z-30 text-sidebar-foreground [&>button]:hidden"
+            className="w-[--sidebar-width] bg-sidebar py-0 px-0 z-50 text-sidebar-foreground [&>button]:hidden"
             style={
               {
                 "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -270,12 +283,7 @@ const SidebarTrigger = React.forwardRef<
     function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
         onClick?.(event)
         console.log("clicked")
-        if (isMobile) {
-            setOpenMobile(!openMobile)
-        }
-        else {
-            toggleSidebar()
-        }
+        toggleSidebar()
     }
 
     return (
@@ -284,7 +292,7 @@ const SidebarTrigger = React.forwardRef<
             data-sidebar="trigger"
             variant="ghost"
             className={cn("burger-box p-[.7rem]", className)}
-            onClick={handleClick}
+            onClick={toggleSidebar}
             {...props}
         >
             <div className="burger" id="burger">
@@ -436,7 +444,7 @@ const SidebarGroup = React.forwardRef<
     <div
       ref={ref}
       data-sidebar="group"
-      className={cn("relative flex w-full min-w-0 flex-col p-2", className)}
+      className={cn("relative flex w-full min-w-0 flex-col px-[.5rem] py-[.725rem]", className)}
       {...props}
     />
   )
