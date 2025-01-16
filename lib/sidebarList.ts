@@ -2,7 +2,6 @@ import { HouseIcon } from "lucide-react"
 import { CalendarDaysIcon } from "lucide-react"
 import { ListCheckIcon } from "lucide-react"
 import { SettingsIcon } from "lucide-react"
-
 import { SidebarList } from "@/libs/interfaces";
 
 export const home: SidebarList[] = [
