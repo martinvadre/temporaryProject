@@ -69,7 +69,7 @@ export default function CalendarPG(): JSX.Element {
                     return {
                         className: `${isOutOfMonth ? "bg-transparent text-gray-400" : "bg-white text-black"}`,
                     };
-                }}            
+                }}
                 components={{
                     toolbar: ({ onNavigate, label }) => (
                         <div className="flex justify-between items-center pb-[1rem]">
@@ -82,11 +82,11 @@ export default function CalendarPG(): JSX.Element {
                             </button>
                         </div>
                     ),
-            
+
                     month: {
                         dateHeader: ({ label, date }) => {
                             const isToday = new Date().toDateString() === date.toDateString();
-            
+
                             return (
                                 <div className={`text-right font-medium ${isToday ? "text-blue-500" : "text-black"}`}>
                                     {label}
@@ -94,7 +94,7 @@ export default function CalendarPG(): JSX.Element {
                             );
                         },
                     },
-            
+
                     agenda: {
                         event: ({ title }) => (
                             <div className="text-blue-600">

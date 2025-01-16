@@ -63,11 +63,11 @@ const SidebarProvider = React.forwardRef<
     ref
   ) => {
     const isMobile = useIsMobile()
-    
+
     // Set the initial mobile sidebar state to closed.
     const [openMobile, setOpenMobile] = React.useState(false)
 
-    // Retrieve sidebar state from cookies, if available.
+    // // Retrieve sidebar state from cookies, if available.
     const getCookie = (name: string) => {
       const value = `; ${document.cookie}`
       const parts = value.split(`; ${name}=`)
@@ -78,8 +78,8 @@ const SidebarProvider = React.forwardRef<
     const storedSidebarState = getCookie(SIDEBAR_COOKIE_NAME)
     const initialState = storedSidebarState === 'true'
 
-    // Desktop state management with defaultOpen or stored cookie value
-    const [_open, _setOpen] = React.useState(initialState || defaultOpen)
+    // // Desktop state management with defaultOpen or stored cookie value
+    const [_open, _setOpen] = React.useState(defaultOpen || initialState)
     const open = openProp ?? _open
 
     const setOpen = React.useCallback(
@@ -549,7 +549,7 @@ const sidebarMenuButtonVariants = cva(
   }
 )
 
-const SidebarMenuButton = React.forwardRef<
+const   SidebarMenuButton = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<"button"> & {
     asChild?: boolean

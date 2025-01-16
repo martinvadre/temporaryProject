@@ -29,16 +29,12 @@ async function getOAuthClient(userId: string) {
         redirectUri: process.env.AUTH_GOOGLE_REDIRECT_URI
     });
 
-    console.log(userAccount.access_token);
-
     OAuth.setCredentials({
         access_token: userAccount.access_token,
         refresh_token: userAccount.refresh_token,
     });
 
     return OAuth;
-
-
 }
 
 export const getCalander = async () => {
@@ -56,9 +52,9 @@ export const getCalander = async () => {
         calendarId: "primary",
         auth: OAuth,
         timeMin: new Date().toISOString(),
-        maxResults: 10,
         singleEvents: true,
         orderBy: "startTime",
+        maxResults: 10,
     });
 
     if (!res) {

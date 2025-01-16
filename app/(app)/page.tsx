@@ -13,7 +13,7 @@ import CLink from "@/components/customUI/link";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Home(): JSX.Element {
-    const { data: session, status } = useSession()
+    const { data: session } = useSession()
     const [greeting, setGreeting] = useState<string>("");
     const [username, setUsername] = useState<string | undefined>(undefined);
 

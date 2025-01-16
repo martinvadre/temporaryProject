@@ -1,40 +1,35 @@
 "use client"
+
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, useSidebar, } from "@/components/ui/sidebar"
 import { sidebarList, home } from "@/lib/sidebarList"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { User2, ChevronDown } from "lucide-react";
+import { User2, ChevronDown, GalleryVerticalEnd, ChevronsUpDown } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Link from "next/link"
+import { useSession } from "next-auth/react";
+import UserProfile from "./userProfile";
+import { Users } from "@/libs/interfaces";
+import { useEffect, useState } from "react";
+import { Skeleton } from "../ui/skeleton";
 
 export default function AppSidebar() {
+    const [user, setUser] = useState<Users>({name: "", email: "", image: ""})
     const {toggleSidebar} = useSidebar()
+    const {data: session} = useSession()
+
+    useEffect(() => {
+        if (session) {
+            setTimeout(() => {
+                setUser(session.user as Users)
+            }, 1000);
+        }
+    }, [session])
 
     return (
         <Sidebar variant="sidebar">
             <div>
                 <SidebarHeader>
-                    <div className="p-[.5rem]">
-                        <div className="flex items-center">
-                            <Avatar>
-                                <AvatarImage src="https://github.com/shadcn.png" />
-                                <AvatarFallback>CN</AvatarFallback>
-                            </Avatar>
-                            <div className="ml-[.7rem]">
-                                <p className="text-[16px] font-medium">shadcn</p>
-                                <p className="text-[14px] font-light text-[#777777]">m@example.com</p>
-                            </div>
-                            <DropdownMenu>
-                                <DropdownMenuTrigger asChild className="translate-x-[2rem] p-[.25rem]">
-                                    <ChevronDown/>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent className="w-48">
-                                    <DropdownMenuItem>Profile</DropdownMenuItem>
-                                    <DropdownMenuItem>Settings</DropdownMenuItem>
-                                    <DropdownMenuItem>Logout</DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                        </div>
-                   </div>
+                    <UserProfile user={user}/>
                 </SidebarHeader>
                 <SidebarContent>
                     <SidebarGroup>
