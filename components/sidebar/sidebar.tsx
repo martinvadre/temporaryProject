@@ -7,11 +7,13 @@ import { useSession } from "next-auth/react";
 import UserProfile from "./userProfile";
 import { Users } from "@/libs/interfaces";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function AppSidebar() {
     const [user, setUser] = useState<Users | undefined>(undefined)
     const {toggleSidebar, isMobile} = useSidebar()
     const {data: session} = useSession()
+    const pathname = usePathname()
 
     useEffect(() => {
         if (session) {
@@ -34,7 +36,7 @@ export default function AppSidebar() {
                                 {
                                     home.map(({name, path, icon: Icon}, index: number) => (
                                         <SidebarMenuItem key={index}>
-                                                <SidebarMenuButton asChild>
+                                            <SidebarMenuButton isActive={pathname == path} asChild>
                                                 <Link onClick={() => isMobile && toggleSidebar()} replace prefetch={true} href={path}>
                                                     <span>
                                                         <Icon size={18} />
@@ -53,7 +55,7 @@ export default function AppSidebar() {
                                 {
                                     sidebarList.map(({name, path, icon: Icon}, index: number) => (
                                         <SidebarMenuItem key={index}>
-                                            <SidebarMenuButton asChild>
+                                            <SidebarMenuButton isActive={pathname == path} asChild>
                                                 <Link onClick={() => isMobile && toggleSidebar()} replace prefetch={true} href={path}>
                                                     <span>
                                                         <Icon size={18} />
