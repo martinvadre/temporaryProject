@@ -375,7 +375,7 @@ const SidebarHeader = React.forwardRef<
     <div
       ref={ref}
       data-sidebar="header"
-      className={cn("flex flex-col gap-2 p-[.65rem] px-[.5rem]", className)}
+      className={cn("flex flex-col gap-2 pt-[.6rem] pb-[.3rem] px-[.5rem]", className)}
       {...props}
     />
   )
@@ -438,7 +438,7 @@ const SidebarGroup = React.forwardRef<
     <div
       ref={ref}
       data-sidebar="group"
-      className={cn("relative flex w-full min-w-0 flex-col px-[.5rem] py-[.725rem]", className)}
+      className={cn("relative flex w-full min-w-0 flex-col pt-[.3rem] pb-[.6rem] px-[.5rem]", className)}
       {...props}
     />
   )
@@ -549,7 +549,7 @@ const sidebarMenuButtonVariants = cva(
   }
 )
 
-const   SidebarMenuButton = React.forwardRef<
+const SidebarMenuButton = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<"button"> & {
     asChild?: boolean

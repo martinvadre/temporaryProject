@@ -7,7 +7,7 @@ export function SignOutBtn() {
          onClick={() => {
             signOut({ callbackUrl: "/dev/test" })
          }}
-         className="py-2 text-red-500 hover:text-red-400 transition duration-300"
+         className="text-red-500 hover:text-red-400 transition duration-300"
       >
          Sign Out
       </button>

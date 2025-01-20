@@ -15,14 +15,14 @@ export default function UserProfile({user}: {user: Users}) {
         return (
             <SidebarMenu>
                 <SidebarMenuItem>
-                    <SidebarMenuButton size="lg" className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
+                    <SidebarMenuButton size="lg" className="rounded-[8px] py-[.6rem] px-[.7rem] h-auto data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
                         <Avatar>
                             <AvatarImage src={user.image as string} />
-                            <AvatarFallback><Skeleton className="h-12 w-12 rounded-full" /></AvatarFallback>
+                            <AvatarFallback><Skeleton className="h-12 w-12 rounded-[8px]" /></AvatarFallback>
                         </Avatar>
                         <div className="ml-[.4rem]">
-                            <Skeleton className="h-4 w-[250px]" />
-                            <Skeleton className="h-4 mt-2 w-[100px]" />
+                            <Skeleton className="h-4 w-[100px]" />
+                            <Skeleton className="h-4 mt-2 w-[160px]" />
                         </div>
                         </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -35,14 +35,14 @@ export default function UserProfile({user}: {user: Users}) {
             <SidebarMenuItem>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <SidebarMenuButton size="lg" className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
+                        <SidebarMenuButton size="lg" className="rounded-[8px] py-[.35rem] px-[.7rem] h-auto data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
                             <Avatar>
                                 <AvatarImage src={user.image as string} />
-                                <AvatarFallback><Skeleton className="h-12 w-12 rounded-full" /></AvatarFallback>
+                                <AvatarFallback><Skeleton className="h-12 w-12 rounded-[8px]" /></AvatarFallback>
                             </Avatar>
                             <div className="ml-[.4rem]">
-                                <p className="text-[16px] font-medium">{user.name}</p>
-                                <p className={`${(user.email as string).length as number > 20 ? "text-[8px]" : "text-[12px]"} font-light text-[#777777]`}>{user.email}</p>
+                                <p className="text-[16px] font-medium">{user.name?.split(" ")[0]}</p>
+                                <p className={`${(user.email as string).length as number > 20 ? "text-[11px]" : "text-[14px]"} font-light text-[#777777]`}>{user.email}</p>
                             </div>
                             <ChevronsUpDown className="ml-auto" />
                         </SidebarMenuButton>
