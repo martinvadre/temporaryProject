@@ -82,7 +82,7 @@ export default function AddEventModal() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <CButton className="bg-[#000000] text-[#ffffff] rounded-[8px] px-[1rem] py-[.25rem] hover:bg-[#323232]">Add Event</CButton>
+                <CButton className="shadow-none bg-[#000000] text-[#ffffff] rounded-[8px] px-[1rem] py-[.25rem] hover:bg-[#323232]">Add Event</CButton>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>

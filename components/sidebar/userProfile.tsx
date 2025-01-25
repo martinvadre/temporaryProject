@@ -22,7 +22,7 @@ export default function UserProfile({user}: {user: Users | undefined}) {
                         </Avatar>
                         <div className="ml-[.4rem]">
                             <Skeleton className="h-4 w-[100px]" />
-                            <Skeleton className="h-4 mt-2 w-[160px]" />
+                            {/* <Skeleton className="h-4 mt-2 w-[160px]" /> */}
                         </div>
                         </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -35,7 +35,7 @@ export default function UserProfile({user}: {user: Users | undefined}) {
             <SidebarMenuItem>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <SidebarMenuButton size="lg" className="rounded-[8px] py-[.35rem] px-[.7rem] h-auto data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
+                        <SidebarMenuButton size="lg" className="rounded-[8px] py-[.6rem] px-[.7rem] h-auto data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
                             <Avatar>
                                 <AvatarImage src={user.image as string} />
                                 <AvatarFallback><Skeleton className="h-12 w-12 rounded-[8px]" /></AvatarFallback>
