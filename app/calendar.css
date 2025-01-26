@@ -427,7 +427,6 @@ button.rbc-input::-moz-focus-inner {
       -ms-flex: 1 0 0px;
           flex: 1 0 0;
   overflow: hidden;
-  right: 1px;
 }
 
 .rbc-day-bg {
@@ -545,7 +544,7 @@ button.rbc-input::-moz-focus-inner {
 }
 
 .rbc-timeslot-group {
-  border-bottom: 1px solid #ddd;
+  border-bottom: .5px solid #cecece;
   min-height: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -554,6 +553,10 @@ button.rbc-input::-moz-focus-inner {
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
+}
+
+.rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group + .rbc-timeslot-group {
+  border-bottom: none;
 }
 
 .rbc-time-gutter,
@@ -702,7 +705,8 @@ button.rbc-input::-moz-focus-inner {
       -ms-flex: 1;
           flex: 1;
   width: 100%;
-  border: 1px solid #ddd;
+  border: .5px solid #cecece;
+  border-radius: 8px;
   min-height: 0;
 }
 .rbc-time-view .rbc-time-gutter {
@@ -742,7 +746,6 @@ button.rbc-input::-moz-focus-inner {
           flex-direction: row;
 }
 .rbc-time-header.rbc-overflowing {
-  border-right: 1px solid #ddd;
 }
 .rbc-rtl .rbc-time-header.rbc-overflowing {
   border-right-width: 0;
@@ -794,7 +797,7 @@ button.rbc-input::-moz-focus-inner {
       -ms-flex-align: start;
           align-items: flex-start;
   width: 100%;
-  border-top: 2px solid #ddd;
+  border-top: .5px solid #cecece;
   overflow-y: auto;
   position: relative;
 }
