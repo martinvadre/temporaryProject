@@ -88,12 +88,14 @@ model Authenticator {
 model ToDo {
     id         String   @id @default(cuid())
     title      String
+    description String?
     completed  Boolean  @default(false)
     createdAt  DateTime @default(now())
     updatedAt  DateTime @updatedAt
     doneAt     DateTime?
+    dueAt    DateTime
     userId     String
-    calendarId String
+    calendarId String   @unique
 
     user      User     @relation(fields: [userId], references: [id])
 

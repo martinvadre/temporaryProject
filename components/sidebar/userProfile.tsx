@@ -1,6 +1,5 @@
 "use client"
-import * as React from "react"
-import { Check, ChevronsUpDown, GalleryVerticalEnd, User2 } from "lucide-react"
+import { ChevronsUpDown } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem,DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { SidebarMenu,SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
 import { Users } from "@/libs/interfaces"
@@ -8,8 +7,9 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { signOut } from "next-auth/react"
 import { Skeleton } from "../ui/skeleton"
 import CLink from "../customUI/link"
+import { JSX } from "react"
 
-export default function UserProfile({user}: {user: Users | undefined}) {
+export default function UserProfile({user}: {user: Users | undefined}): JSX.Element {
 
     if (!user) {
         return (

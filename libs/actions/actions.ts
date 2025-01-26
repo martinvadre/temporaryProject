@@ -6,7 +6,6 @@ import { generateVerificationToken } from "@/libs/utils/verification-token";
 import { sendVerificationEmail } from "@/libs/utils/mail";
 import { AuthError } from 'next-auth';
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 export async function googleSignInAction() {
    await signIn("google", { redirect: true, redirectTo: "/" })
@@ -102,4 +101,9 @@ export async function emailSignInAction(prevState: Record<string, string | numbe
 
         throw error;
     }
+}
+
+
+export async function revalidatePathAction(path: string) {
+    revalidatePath(path)
 }

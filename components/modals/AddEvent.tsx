@@ -98,10 +98,10 @@ export default function AddEventModal() {
                         onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
                         className="border border-[#cecece] rounded-[8px] w-full px-[.5rem] shadow-none mb-[1rem] text-[14px]"
                     />
-                    <div className="border border-[#cecece] rounded-[8px]">
+                    <div className={`border border-[#cecece] rounded-[8px] ${loading ? "opacity-50" : "opacity-100"}`}>
                         <div className="flex">
                             <div className="m-auto w-full px-[.5rem]">
-                                <Label className="text-center text-[#777777] font-normal" htmlFor="start">Starts</Label>
+                                <Label className={`text-center font-normal text-[#777777] ${loading ? "opacity-50" : "opacity-100"}`} htmlFor="start">Starts</Label>
                             </div>
                             <div className="m-auto">
                                 <Input
@@ -117,7 +117,7 @@ export default function AddEventModal() {
                         <div className="mx-[.5rem] border-b border-[#cecece]"></div>
                         <div className="flex">
                             <div className="m-auto w-full px-[.5rem]">
-                                <Label className="text-center text-[#777777] font-normal" htmlFor="end">Ends</Label>
+                                <Label className={`text-center font-normal text-[#777777] ${loading ? "opacity-50" : "opacity-100"}`} htmlFor="end">Ends</Label>
                             </div>
                             <div className="m-auto">
                                 <Input
@@ -133,7 +133,7 @@ export default function AddEventModal() {
                     </div>
                 </div>
                 <DialogFooter>
-                    <DialogPrimitive.Close className="text-[14px] border border-[#cecece] bg-[#ffffff] text-[#555555] rounded-[8px] px-[1rem] py-[.25rem] hover:bg-[#f8f8f8]">Cancel</DialogPrimitive.Close>
+                    <DialogPrimitive.Close style={{pointerEvents: loading ? "none" : "auto"}} disabled={loading} className="disabled:opacity-50 text-[14px] border border-[#cecece] bg-[#ffffff] text-[#555555] rounded-[8px] px-[1rem] py-[.25rem] hover:bg-[#f8f8f8]">Cancel</DialogPrimitive.Close>
                     <CButton className="text-[14px] bg-[#000000] text-[#ffffff] rounded-[8px] px-[1rem] py-[.25rem] hover:bg-[#323232]" isLoading={loading} onClick={handleAddEvent}>&nbsp;&nbsp;Save&nbsp;&nbsp;</CButton>
                 </DialogFooter>
             </DialogContent>
