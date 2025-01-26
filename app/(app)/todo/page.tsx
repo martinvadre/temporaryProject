@@ -1,9 +1,8 @@
-"use client";
-
-import { JSX ,useEffect, useState } from "react";
+import { JSX, Suspense } from "react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import Link from "next/link";
 import CLink from "@/components/customUI/link";
+import AddTaskModal from "@/components/modals/AddTask";
+import TodoList from "@/dev/components/todoList";
 
 export default function TodoPG(): JSX.Element {
 
@@ -26,6 +25,15 @@ export default function TodoPG(): JSX.Element {
             </Breadcrumb>
             <div>
                 <h1>To Do Page</h1>
+                <div className="py-[1rem] flex justify-start">
+                    <AddTaskModal/>
+                </div>
+                <div>
+                    <h1 className="mb-1">TodoList</h1>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <TodoList/>
+                    </Suspense>
+                </div>
             </div>
         </div>
     );

@@ -26,3 +26,12 @@ export const localizer = dateFnsLocalizer({
     getDay,
     locales,
 });
+
+
+export function isBeforeToday(date: Date): boolean {
+    const now = new Date()
+
+    if (date < now) return false
+
+    return true
+}
