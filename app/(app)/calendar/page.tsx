@@ -9,6 +9,7 @@ import { Calendar as BigCalendar, momentLocalizer, View, NavigateAction } from '
 import { CalendarEvent } from "@/libs/interfaces";
 import { localizer } from "@/libs/utils/timeUtils";
 import AddEventModal from "@/components/modals/AddEvent";
+import AddTaskModal from "@/components/modals/AddTask";
 import { Button } from "@/components/ui/button";
 import { getCalander } from "@/libs/googles/calander";
 
@@ -56,8 +57,9 @@ export default function CalendarPG(): JSX.Element {
                 </BreadcrumbList>
             </Breadcrumb>
 
-            <div className="py-[1rem] flex justify-start">
+            <div className="py-[1rem] flex justify-start space-x-2">
                 <AddEventModal/>
+                <AddTaskModal/>
             </div>
 
             <BigCalendar

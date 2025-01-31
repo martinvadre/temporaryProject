@@ -94,7 +94,7 @@ export default function SignInWithCredencial() {
                         {
                             form.formState.errors.password && <FormMessage className="mt-[3px] ml-[1px]">{form.formState.errors.password.message}</FormMessage>
                         }
-                        <CButton isLoading={isPending || response.status == 200} isDisabled={!(form.getValues().password != "" && form.getValues().email != "")} className="shadow-none w-full h-auto p-[10px] mt-[20px] bg-[#323232] text-white rounded-full text-[16px] cursor-pointer transition ease duration-250 hover:bg-[#000000]" type="submit">Sign In</CButton>
+                        <CButton isLoading={isPending || response.status == 200} isDisabled={!(form.getValues().password != "" && form.getValues().email != "")} className="shadow-none w-full h-auto p-[10px] mt-[20px] bg-[#000000] text-white rounded-full text-[16px] cursor-pointer transition ease duration-250 hover:bg-[#323232]" type="submit">Sign In</CButton>
                     </form>
                 </Form>
                 <p className="font-normal text-[12px] leading-[1.5] text-[#777777] mt-[20px] text-center">New user? <Link className="text-[#323232]" href="/auth/signup">Sign up</Link></p>

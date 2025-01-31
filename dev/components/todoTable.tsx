@@ -56,7 +56,7 @@ export default function TodoTable<TData extends ToDo, TValue>({data}: DataTableP
 
                 return (
                     <div className="flex gap-2">
-                        <CButton isDisabled={row.original.completed} isLoading={pending} onClick={() => {
+                        <CButton className="shadow-none border-[.5px] border-[#cecece] rounded-[8px]" isDisabled={row.original.completed} isLoading={pending} onClick={() => {
                             setPending(() => !pending)
                             if (!markAsDone(row.original)) {
                                 setPending(false)
@@ -65,7 +65,7 @@ export default function TodoTable<TData extends ToDo, TValue>({data}: DataTableP
                             }
                             setPending(() => !pending)
                         }} size={"sm"} variant={"outline"}>{row.original.completed ? "Completed" :"Mark Complete"}</CButton>
-                        <CButton isLoading={deleting} size={"icon"} variant={"destructive"} onClick={async () => {
+                        <CButton className="w-8 h-8 rounded-[8px]" isLoading={deleting} size={"icon"} variant={"destructive"} onClick={async () => {
                             setDeleting(() => !deleting)
                             await deleteToDo((row.original as ToDo).calendarId)
                             setDeleting(() => !deleting)
@@ -91,7 +91,7 @@ export default function TodoTable<TData extends ToDo, TValue>({data}: DataTableP
     return (
         <>
 
-            <div className="rounded-md border">
+            <div className="rounded-[8px] border">
                 <Table>
                     <TableHeader>
                         {
@@ -136,11 +136,12 @@ export default function TodoTable<TData extends ToDo, TValue>({data}: DataTableP
                                 </TableCell>
                             </TableRow>
                         )}
-                </TableBody>
+                    </TableBody>
                 </Table>
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
                 <CButton
+                    className="shadow-none text-[14px] border-[.5px] border-[#cecece] bg-[#ffffff] text-[#555555] rounded-[8px] px-[1rem] py-[.25rem] hover:bg-[#f8f8f8]"
                     variant="outline"
                     size="sm"
                     onClick={() => table.previousPage()}
@@ -149,6 +150,7 @@ export default function TodoTable<TData extends ToDo, TValue>({data}: DataTableP
                     Previous
                 </CButton>
                 <CButton
+                    className="shadow-none text-[14px] border-[.5px] border-[#cecece] bg-[#ffffff] text-[#555555] rounded-[8px] px-[1rem] py-[.25rem] hover:bg-[#f8f8f8]"
                     variant="outline"
                     size="sm"
                     onClick={() => table.nextPage()}
