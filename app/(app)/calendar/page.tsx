@@ -117,7 +117,7 @@ export default function CalendarPG(): JSX.Element {
                         </div>
                     ),
 
-                    eventWrapper: (children) => {
+                    eventWrapper: ({ children }) => {
                         return (
                             <div className="p-[.25rem]">
                                 {children}
