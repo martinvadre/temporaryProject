@@ -98,11 +98,8 @@ export default function AddTaskModal() {
                         </div>
                     </div>
                     <div>
-                        <div className="m-auto w-full px-[.1rem]">
-                            <Label className={`text-center font-normal ${loading ? "opacity-50" : "opacity-100"}`} htmlFor="description">Description</Label>
-                        </div>
                         <div className="m-auto">
-                            <Textarea style={{resize: "none"}} disabled={loading} placeholder="Do not forget to bring an umbrella." className="w-full h-full border border-[#cecece] rounded-[8px] px-[.5rem] shadow-none mb-[1rem] text-[14px]" value={task.description} onChange={(e) => setTask({ ...task, description: e.target.value })}></Textarea>
+                            <Textarea style={{resize: "none"}} disabled={loading} placeholder="Details" className="w-full h-full border border-[#cecece] rounded-[8px] px-[.5rem] shadow-none mb-[1rem] text-[14px]" value={task.description} onChange={(e) => setTask({ ...task, description: e.target.value })}></Textarea>
                         </div>
                     </div>
                 </div>

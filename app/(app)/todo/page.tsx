@@ -24,7 +24,6 @@ export default function TodoPG(): JSX.Element {
                 </BreadcrumbList>
             </Breadcrumb>
             <div>
-                <h1>To Do Page</h1>
                 <div className="py-[1rem] flex justify-start">
                     <AddTaskModal/>
                 </div>
