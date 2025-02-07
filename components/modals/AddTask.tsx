@@ -18,8 +18,6 @@ import { revalidatePath } from "next/cache"
 export default function AddTaskModal() {
     const toastId = "GAY";
 
-    const {data: session} = useSession();
-
     const [task, setTask] = useState<ToDo>({
         dueAt: new Date(),
         title: "",
@@ -99,7 +97,7 @@ export default function AddTaskModal() {
                     </div>
                     <div>
                         <div className="m-auto">
-                            <Textarea style={{resize: "none"}} disabled={loading} placeholder="Details" className="w-full h-full border border-[#cecece] rounded-[8px] px-[.5rem] shadow-none mb-[1rem] text-[14px]" value={task.description} onChange={(e) => setTask({ ...task, description: e.target.value })}></Textarea>
+                            <Textarea style={{resize: "none"}} disabled={loading} placeholder="Details" className="w-full h-full border border-[#cecece] rounded-[8px] px-[.5rem] shadow-none mb-[1rem] text-[14px]" value={task.description ?? ""} onChange={(e) => setTask({ ...task, description: e.target.value })}></Textarea>
                         </div>
                     </div>
                 </div>

@@ -1,14 +1,9 @@
 "use client";
 
-import { Roboto, Inter, Arimo } from "next/font/google";
 import { JSX ,useEffect, useState } from "react";
-// import { navHandler } from "@/libs/utils/navbarHandler";
-import Navbar from "@/components/navbar/navbar";
-import Sidebar from "@/components/sidebar/sidebar";
 import { useSession } from "next-auth/react";
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb";
-import Link from "next/link";
 import CLink from "@/components/customUI/link";
 import { Skeleton } from "@/components/ui/skeleton";
 

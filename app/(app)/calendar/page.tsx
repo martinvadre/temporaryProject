@@ -8,6 +8,7 @@ import {Calendar as BigCalendar, momentLocalizer, View} from 'react-big-calendar
 // import "react-big-calendar/lib/css/react-big-calendar.css";
 import { CalendarEvent } from "@/libs/interfaces";
 import AddEventModal from "@/components/modals/AddEvent";
+import AddTaskModal from "@/components/modals/AddTask";
 import { getCalendar } from "@/libs/googles/calendar";
 
 export default function CalendarPG(): JSX.Element {
@@ -34,6 +35,8 @@ export default function CalendarPG(): JSX.Element {
 
     useEffect(() => {
         getCalendarTest()
+
+
     }, [])
 
     return (
@@ -54,9 +57,11 @@ export default function CalendarPG(): JSX.Element {
                 </BreadcrumbList>
             </Breadcrumb>
 
-            <div className="py-[1rem] flex justify-start">
+            <div className="py-[1rem] flex justify-start space-x-2">
                 <AddEventModal/>
+                <AddTaskModal/>
             </div>
+
 
             <BigCalendar
                 localizer={localizer}
