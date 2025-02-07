@@ -5,7 +5,7 @@ import { flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge";
 import { isBeforeToday } from "@/libs/utils/timeUtils";
-import { deleteToDo, markAsDone } from "@/libs/googles/calander";
+import { deleteToDo, markAsDone } from "@/libs/googles/calendar";
 import CButton from "@/components/customUI/button";
 import { useState } from "react";
 import { Trash2Icon } from "lucide-react";

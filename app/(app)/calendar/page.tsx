@@ -4,20 +4,18 @@ import { JSX, useEffect, useState } from "react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import moment from 'moment';
-import { Calendar as BigCalendar, momentLocalizer, View, NavigateAction } from 'react-big-calendar';
+import {Calendar as BigCalendar, momentLocalizer, View} from 'react-big-calendar';
 // import "react-big-calendar/lib/css/react-big-calendar.css";
 import { CalendarEvent } from "@/libs/interfaces";
-import { localizer } from "@/libs/utils/timeUtils";
 import AddEventModal from "@/components/modals/AddEvent";
-import { Button } from "@/components/ui/button";
-import { getCalander } from "@/libs/googles/calander";
+import { getCalendar } from "@/libs/googles/calendar";
 
 export default function CalendarPG(): JSX.Element {
     const localizer = momentLocalizer(moment);
     const [events, setEvents] = useState<CalendarEvent[]>([]);
 
-    async function getCalanderTest() {
-        const data = await getCalander();
+    async function getCalendarTest() {
+        const data = await getCalendar();
 
         if (!data) return;
 
@@ -34,8 +32,10 @@ export default function CalendarPG(): JSX.Element {
         }
     }
 
-    useEffect(() => {
-        getCalanderTest()
+    useEffect(async () => {
+        await getCalendarTest()
+
+
     }, [])
 
     return (
@@ -102,7 +102,7 @@ export default function CalendarPG(): JSX.Element {
                                 {["month", "week", "day", "agenda"].map((viewOption) => (
                                     <button
                                         key={viewOption}
-                                        onClick={() => onView(viewOption)}
+                                        onClick={() => onView(viewOption as View)}
                                         className={`text-[14px] border-[.5px] border-[#cecece] rounded-[8px] px-[1rem] py-[.25rem] ${
                                             view === viewOption ? "bg-black border-black text-white" : "bg-white text-[#555555] hover:bg-[#f8f8f8]"
                                         }`}
@@ -114,7 +114,7 @@ export default function CalendarPG(): JSX.Element {
                         </div>
                     ),
 
-                    eventWrapper: ({ event, children }) => {
+                    eventWrapper: (children) => {
                         return (
                             <div className="p-[.25rem]">
                                 {children}
@@ -129,7 +129,7 @@ export default function CalendarPG(): JSX.Element {
                             </div>
                         );
                     },
-            
+
                     month: {
                         dateHeader: ({ label, date }) => {
                             const isToday = new Date().toDateString() === date.toDateString();
@@ -145,7 +145,7 @@ export default function CalendarPG(): JSX.Element {
                         //     </div>
                         // ),
                     },
-            
+
                     agenda: {
                         event: ({ title }) => (
                             <div className="text-blue-600">

@@ -11,7 +11,7 @@ import { delay } from "@/libs/utils/utils";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { createToDo } from "@/libs/googles/calander"
+import { createToDo } from "@/libs/googles/calendar"
 import { isBeforeToday } from "@/libs/utils/timeUtils";
 import { revalidatePath } from "next/cache"
 

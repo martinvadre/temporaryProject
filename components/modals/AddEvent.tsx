@@ -8,7 +8,7 @@ import { delay } from "@/libs/utils/utils";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { createEvent } from "@/libs/googles/calander";
+import { createEvent } from "@/libs/googles/calendar";
 
 export default function AddEventModal() {
     const toastId = "GAY";

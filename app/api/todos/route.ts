@@ -30,26 +30,16 @@ export async function POST(req: Request, res: Response): Promise<Response> {
         return NextResponse.json({ message: "Todos not found" }, { status: 403 });
     }
 
+    const taskMap = new Map<string, ToDo>(
+        (await prisma.toDo.findMany()).map((todo) => [todo.calendarId, todo])
+    );
+
     const d = (await Promise.all(test.data.items.map(async (todo) => {
 
         if (todo.title != "") {
-            const dbTodo = await prisma.toDo.findFirst({
-                where: {
-                    calendarId: todo.id as string,
-                }
-            });
+            const dbTodo = taskMap.get(todo.id as string);
 
-            if (dbTodo === null) return {
-                id: todo.id,
-                title: todo.title,
-                description: todo.notes,
-                dueAt: new Date(todo.due as string),
-                completed: todo.status === "completed",
-                calendarId: todo.id,
-                doneAt: todo.updated,
-            }
-
-            if (todo.status === "completed" && todo != undefined) {
+            if (todo.status === "completed" && todo != undefined && dbTodo != undefined) {
                 const r = await prisma.toDo.update({
                     where: {
                         calendarId: todo.id as string,

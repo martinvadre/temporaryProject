@@ -1,4 +1,4 @@
-import { getTodos } from "@/libs/googles/calander";
+import { getTodos } from "@/libs/googles/calendar";
 import { ToDo } from "@prisma/client";
 import TodoTable from "./todoTable";
 

@@ -1,17 +1,16 @@
 "use server";
 
-import { google, calendar_v3, tasks_v1 } from 'googleapis';
+import { google, calendar_v3 } from 'googleapis';
 import prisma from '@/libs/prismadb';
 import { auth } from '../auth';
 import { EventAdd, ToDo } from '../interfaces';
 import { revalidatePath } from 'next/cache';
 import { getOAuthClient } from '../utils/auth';
-import { cache } from 'react';
 
 const calendar = google.calendar("v3");
 const tasks = google.tasks("v1");
 
-export const getCalander = async () => {
+export const getCalendar = async () => {
     const session = await auth();
 
     if (!session) {
@@ -41,11 +40,11 @@ export const getCalander = async () => {
         throw new Error("Events not found");
     }
 
-    if (!b) {
+    if (!b || !b.data.items) {
         throw new Error("Todos not found");
     }
 
-    b.data.items?.forEach(async (todo) => {
+    for (const todo of b.data.items) {
         res.data.items?.push({
             id: todo.id,
             summary: todo.title,
@@ -56,7 +55,7 @@ export const getCalander = async () => {
                 dateTime: todo.due as string,
             },
         } as calendar_v3.Schema$Event);
-    });
+    }
 
     return res.data.items;
 }

@@ -2,7 +2,7 @@
 
 import { JSX } from 'react'
 import { Button } from '@/components/ui/button'
-import { createEvent, getCalander } from "@/libs/googles/calander";
+import { createEvent, getCalander } from "@/libs/googles/calendar";
 
 export default function TestPg(): JSX.Element {
 
